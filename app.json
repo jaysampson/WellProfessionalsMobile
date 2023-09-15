@@ -1,0 +1,50 @@
+{
+  "expo": {
+    "name": "wellProfessionalMobile",
+    "slug": "wellProfessionalMobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.sunkanmi.wellProfessionalMobile"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5215fd3c-e5e4-4939-ba4f-afc3f7b20f91"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/5215fd3c-e5e4-4939-ba4f-afc3f7b20f91"
+    },
+    "plugins":[
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow wellProfessionalMobile to access your microphone."
+        }
+      ]
+    ]
+  }
+}
