@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import CountryPicker from "react-native-country-picker-modal";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import CustomInput from "../../customComponents/CustomInput";
+import CustomInput from "../../../customComponents/CustomInput";
 
 
 const ViewProfileComp = ({ onchangeText, form, setForm }) => {
@@ -29,7 +29,7 @@ const ViewProfileComp = ({ onchangeText, form, setForm }) => {
       <View className="items-center mt-14">
         <View className="w-[65] h-[65] bg-red-600 rounded-full">
           <Image
-            source={require("../../../assets/img/top_rate_3.png")}
+            source={require("../../../../assets/img//top_rate_3.png")}
             style={{
               width: "100%",
               height: "100%",

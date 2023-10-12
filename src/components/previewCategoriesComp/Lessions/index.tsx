@@ -58,7 +58,7 @@ const Lessions = ({ item, selectLesson }) => {
     <View>
       <Text className="font-[PlusBold] text-[18px] mb-4">{item?.lessons?.length} Lessons</Text>
       <View>
-        {item?.lessons?.map((item, index) => (
+        {item?.courseData?.map((item, index) => (
           <TouchableOpacity
             key={index}
             className="flex-row items-center justify-between bg-white p-4 rounded-lg my-1"

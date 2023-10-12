@@ -1,9 +1,12 @@
 import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
-import React from "react";
+import React from 'react'
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation  } from "@react-navigation/native";
 
-const AllCoursesComp = ({ trendingData }) => {
+
+
+
+const TrendingComp = ({ trendingData }) => {
   const navigation = useNavigation();
 
   return (
@@ -18,12 +21,12 @@ const AllCoursesComp = ({ trendingData }) => {
           <MaterialIcons name="keyboard-arrow-left" size={24} color="black" />
         </TouchableOpacity>
         <Text className="text-[18px] text-[#090A0A] font-[InterRegular]">
-          All Courses
+          Now Trending courses
         </Text>
         <View />
       </View>
       <View className="pt-5">
-        {/* <Text className="font-[PlusBold] text-[18px]">Midstream</Text> */}
+        <Text className="font-[PlusBold] text-[18px]">Midstream</Text>
 
         <FlatList
           data={trendingData}
@@ -35,7 +38,7 @@ const AllCoursesComp = ({ trendingData }) => {
               <View className="w-[161px] h-[260px]">
                 <View className="h-[102px]">
                   <Image
-                    source={require("../../../assets/img/top_rate_3.png")}
+                    source={require("../../../../assets/img/top_rate_3.png")}
                     style={{
                       width: "100%",
                       height: "100%",
@@ -83,4 +86,4 @@ const AllCoursesComp = ({ trendingData }) => {
   );
 };
 
-export default AllCoursesComp;
+export default TrendingComp

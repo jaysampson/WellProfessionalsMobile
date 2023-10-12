@@ -19,34 +19,34 @@ const { width } = Dimensions.get("window");
 
 const HomeScreenComp = ({
   homeSwiper,
-  trendingCourseData,
   ratedCourseData,
   isLoading,
   error,
   data,
   getCourses,
+  authUser,
+  requestLoggedIn,
+  getTopTrendingCourses,
 }) => {
+  console.log(authUser?.others?.name, "name");
   const navigation = useNavigation();
-
-  
-
   return (
     <>
       <View className="py-10 px-6  bg-[#1E1D2F]">
         <View className="flex-row mt-5 justify-between">
-          {isLoading && (
-            <Text className="text-lg text-white font-[PlusSemiBold]">
+          {isLoading && requestLoggedIn && (
+            <Text className="text-[18px] text-white font-[700] leading-[32px] font-[PlusSemiBold]">
               Loading...
             </Text>
           )}
           {error && (
-            <Text className="text-lg text-white font-[PlusSemiBold]">
+            <Text className="text-[18px] text-white font-[700] leading-[32px] font-[Plusregular]">
               {/* {error} */}
             </Text>
           )}
           {!isLoading && !error && (
-            <Text className="text-lg text-white font-[PlusSemiBold]">
-              Hello {data?.others?.name}
+            <Text className="text-[18px] text-white font-[700] leading-[32px] font-[Plusregular]">
+              Hello {data?.others?.name || authUser?.others?.name}
             </Text>
           )}
 
@@ -56,8 +56,12 @@ const HomeScreenComp = ({
         </View>
 
         <View className="flex-row h-14 mt-7 border border-gray-300 rounded-md items-center ">
-          <TouchableOpacity className="w-32 h-11 items-center justify-center bg-[#1E1D2F]">
-            <Text className="text-white font-[PlusMedium]">Categories</Text>
+          <TouchableOpacity className="w-32 h-11 items-center justify-center bg-[#1E1D2F]" onPress={()=>{
+            navigation.navigate("CourseCategories")
+          }}>
+            <Text className="text-[14px] text-white font-[500] leading-[17px] font-[Plusregular]">
+              Categories
+            </Text>
           </TouchableOpacity>
           <View className="flex-row flex-1 px-3  h-[54] items-center bg-white justify-between ">
             <TextInput placeholder="Search something" className="  flex-1 " />
@@ -92,7 +96,7 @@ const HomeScreenComp = ({
           )}
         />
       </View>
-      <View className="py-10 px-6">
+      <ScrollView className="py-10 px-6">
         {/* ALl Courses */}
         <View className="flex-row items-center justify-between">
           <Text className=" text-lg font-[PlusBold]">All Courses</Text>
@@ -114,13 +118,12 @@ const HomeScreenComp = ({
                   key={item.id}
                   className="w-24 mr-5"
                   onPress={() => {
-                    console.log("click", item.id);
                     navigation.navigate("CoursePreviewScreen", { item });
                   }}
                 >
                   <View className="bg-red-700 w-24 h-32 rounded-xl">
                     <Image
-                      source={{ uri: item.image }}
+                      source={{ uri: item?.thumbnail?.url }}
                       style={{
                         width: "100%",
                         height: "100%",
@@ -128,8 +131,8 @@ const HomeScreenComp = ({
                       }}
                     />
                   </View>
-                  <Text className="text-[10px] text-center font-[Plusregular] mt-2">
-                    {item.title}
+                  <Text className="text-[#090A0A] font-[400] leading-[15px] font-[Plusregular] text-[10px] text-center mt-2">
+                    {item.name}
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -152,7 +155,7 @@ const HomeScreenComp = ({
         </View>
         <View className="py-10">
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {getCourses?.data?.getCourse?.map((item) => (
+            {getTopTrendingCourses?.map((item) => (
               <View className=" flex-row">
                 <TouchableOpacity
                   key={item.id}
@@ -164,7 +167,7 @@ const HomeScreenComp = ({
                 >
                   <View className="bg-red-700 w-24 h-32 rounded-xl">
                     <Image
-                      source={{ uri: item.image }}
+                      source={{ uri: item?.thumbnail?.url }}
                       style={{
                         width: "100%",
                         height: "100%",
@@ -173,7 +176,7 @@ const HomeScreenComp = ({
                     />
                   </View>
                   <Text className="text-[10px] text-center font-[Plusregular] mt-2">
-                    {item.title}
+                    {item.name}
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -245,7 +248,7 @@ const HomeScreenComp = ({
             </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 };

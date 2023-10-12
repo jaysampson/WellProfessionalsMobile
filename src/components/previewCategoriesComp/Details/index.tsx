@@ -51,25 +51,26 @@ const Details = ({ item }) => {
       <View>
         <Text className="font-[PlusBold] text-[18px] mb-4">About Course</Text>
         <View>
-          <Text className="font-[Plusregular] text-[14px]">
+          <Text className="text-[#191D23] font-[Plusregular] font-[400px] text-[14px] leading-normal">
             {item?.description}
           </Text>
           <TouchableOpacity>
-            <Text className="text-[#AF5E41] text-[14px] font-[PlusSemiBold]">
+            <Text className="text-[#AF5E41] text-[14px] font-[PlusSemiBold] my-2">
               Show More{" "}
             </Text>
           </TouchableOpacity>
         </View>
       </View>
       <View>
-        <Text className="text-[14px] font-[Plusregular] text-[#545454]">
+        <Text className="font-[Plusregular] font-[400px] text-[14px] leading-[16px]">
           WHAT’S INCLUDED:{" "}
         </Text>
-        {data.map((item) => (
+        {item.benefits.map((b) => (
           <View className="flex-row mt-2 items-center">
-            {item.icon}
-            <Text className="text-[13px] font-[PlusSemiBold] leading-[20px]">
-              {item.title}
+            {/* {item.icon} */}
+
+            <Text className="font-[Plusregular] font-[600px] text-[13px] leading-[20px]">
+              {b.title}
             </Text>
           </View>
         ))}
@@ -85,6 +86,11 @@ const Details = ({ item }) => {
           </View>
         ))}
       </View>
+      <TouchableOpacity>
+        <Text className="text-[#AF5E41] text-[14px] font-[PlusSemiBold] my-2">
+          Show More{" "}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

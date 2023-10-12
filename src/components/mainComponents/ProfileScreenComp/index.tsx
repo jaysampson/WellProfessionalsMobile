@@ -15,8 +15,10 @@ const ProfileScreenComp = ({
   isError,
   error,
   data,
+  authUser,
 }) => {
   const navigation = useNavigation();
+  console.log(data, "url");
 
   return (
     <View className="py-10 px-6 my-5">
@@ -38,7 +40,7 @@ const ProfileScreenComp = ({
       <View className="items-center mt-2">
         <View className="w-[65] h-[65] bg-red-600 rounded-full">
           <Image
-            source={require("../../../assets/img/top_rate_3.png")}
+            source={{ uri: data?.others?.image?.url || authUser?.others?.image?.url }}
             style={{
               width: "100%",
               height: "100%",
@@ -51,7 +53,7 @@ const ProfileScreenComp = ({
             Loading...
           </Text>
         )}
-        {!isLoading && !isError && (
+        {!isLoading && !isError &&  (
           <Text className="font-[PlusSemiBold] mt-2 text-[18px] leading-6">
             {data?.others?.name}
           </Text>

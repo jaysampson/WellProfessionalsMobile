@@ -12,6 +12,7 @@ import HomeNavigator from "./HomeNavigator";
 import useAuthStore from "../stores";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getMeUser } from "../helper/api";
+import { storage } from "../mmkvStore";
 
 const AppNavigation = () => {
   const { setRequestIsLogged,requestLoggedIn, setAuthUser, authUser } = useAuthStore(
@@ -27,13 +28,16 @@ const AppNavigation = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(requestLoggedIn);
   const [authLoad, setAuthLoad] = useState(false);
 
-  // console.log(requestLoggedIn,authUser, "authUser")
+  console.log(requestLoggedIn,authUser, "authUser")
   // console.log(isLoading, isError, error, data, "555555555555")
 
   const getUser = async () => {
     try {
-      const user = await AsyncStorage.getItem("user");
-      const token = await AsyncStorage.getItem("token");
+      // const user = await AsyncStorage.getItem("user");
+      // const token = await AsyncStorage.getItem("token");
+      const user = storage.getString("user");
+      const token = storage.getString("token");
+
       // console.log(user, "authStorage");
 
       if (user || token) {

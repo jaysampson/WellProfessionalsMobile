@@ -1,17 +1,27 @@
 import { View, Text, ScrollView } from "react-native";
 import React from "react";
-import HomeScreenComp from "../../../components/mainComponents/HomeScreenComp";
+// import HomeScreenComp from "../../../components/mainComponents/HomeScreenComp";
 import { useQuery } from "react-query";
 import { getAllCourses, getMeUser } from "../../../helper/api";
+import useAuthStore from "../../../stores";
+import HomeScreenComp from "../../../components/mainComponents/HomeScreenComp";
 
 const HomeScreen = () => {
   //CALL USEQUERY
   const { isLoading, error, data } = useQuery(["getme"], getMeUser);
   const getCourses = useQuery(["course"], getAllCourses);
- 
-  
 
-  console.log(data, "data");
+  const { setRequestIsLogged, requestLoggedIn, setAuthUser, authUser } =
+    useAuthStore((state) => state);
+
+  // console.log(authUser, requestLoggedIn, "requestLoggedIn");
+
+  // console.log(authUser, "authUser");
+  //GET TRENDING COURSES
+  const getTopTrendingCourses = getCourses?.data?.getCourse.filter(
+    (d) => d.purchased > 0
+  );
+
 
   const homeSwiper = [
     {
@@ -34,28 +44,7 @@ const HomeScreen = () => {
     },
   ];
 
-  const trendingCourseData = [
-    {
-      id: "1",
-      img: require("../../../assets/img/top_rate_3.png"),
-      title: "Introduction to Petroleum Exploration and Production",
-    },
-    {
-      id: "2",
-      img: require("../../../assets/img/top_rate_2.png"),
-      title: "Drilling Engineering Fundamentals",
-    },
-    {
-      id: "3",
-      img: require("../../../assets/img/top_rate_3.png"),
-      title: "Reservoir Engineering Principles",
-    },
-    {
-      id: "4",
-      img: require("../../../assets/img/top_rate_2.png"),
-      title: "Introduction to Petroleum Exploration and Production",
-    },
-  ];
+ 
 
   const ratedCourseData = [
     {
@@ -75,17 +64,17 @@ const HomeScreen = () => {
     },
   ];
   return (
-    <ScrollView>
-      <HomeScreenComp
-        homeSwiper={homeSwiper}
-        trendingCourseData={trendingCourseData}
-        ratedCourseData={ratedCourseData}
-        isLoading={isLoading}
-        error={error}
-        data={data}
-        getCourses={getCourses}
-      />
-    </ScrollView>
+    <HomeScreenComp
+      homeSwiper={homeSwiper}
+      ratedCourseData={ratedCourseData}
+      isLoading={isLoading}
+      error={error}
+      data={data}
+      getCourses={getCourses}
+      authUser={authUser}
+      requestLoggedIn={requestLoggedIn}
+      getTopTrendingCourses={getTopTrendingCourses}
+    />
   );
 };
 

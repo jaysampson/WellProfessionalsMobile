@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import TopRatedScreen from '../screens/mainScreens/TopRatedScreen';
 import { CartIcon, FeaturedIcon, HomeIcon, ProfileIcon, SearchIcon } from '../helper/Icon';
 import HomeStackNavigators from './rootStackNavigators/HomeStackNavigators';
 import { HomeStackParamList } from '../types/navigations';
 import ProfileStackNavigators from './rootStackNavigators/ProfileStackNavigators';
 import CartScreen from '../screens/mainScreens/CartScreen';
+import SearchScreen from '../screens/mainScreens/SearchScreen';
 
 
 const HomeStack = ()=>{}
@@ -80,7 +80,7 @@ const HomeNavigator = () => {
         />
         <Tab.Screen
           name="Search"
-          component={DummyScreen}
+          component={SearchScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
               <SearchIcon size={size} color={color} />

@@ -4,9 +4,9 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Video, ResizeMode } from "expo-av";
 import StarRating, { StarRatingDisplay } from "react-native-star-rating-widget";
-import Details from "../../previewCategoriesComp/Details";
-import Lessions from "../../previewCategoriesComp/Lessions";
-import Reviews from "../../previewCategoriesComp/Reviews";
+import Details from "../../../previewCategoriesComp/Details";
+import Lessions from "../../../previewCategoriesComp/Lessions";
+import Reviews from "../../../previewCategoriesComp/Reviews";
 
 const CoursePrevieComp = ({
   courseCategories,
@@ -16,6 +16,8 @@ const CoursePrevieComp = ({
   getAllUsers,
   rating,
   setRating,
+  handlAddToCart,
+  courseData,
 }) => {
   const navigation = useNavigation();
   const video = React.useRef(null);
@@ -25,12 +27,12 @@ const CoursePrevieComp = ({
   const selectLesson = (id) => {
     setVideUrl(id);
   };
-  const vider_show = item.lessons.find((d) => d._id);
 
-  const selectedText = "bg-[#A2A7A9] text-[#252C32] font-[PlusSemiBold]";
+  const selectedText =
+    "bg-[#E5E9EB] text-[#252C32] text-[14px] font-[600] font-[Plusregular] leading-[24px] tracking-[-0.084px]";
   return (
     <>
-      <View className=" py-10 px-6 my-5 ">
+      <View className=" pt-10 px-6 mt-5  ">
         <View className="flex-row justify-between items-center">
           <TouchableOpacity
             className="w-25 h-6 border border-gray-300"
@@ -58,7 +60,7 @@ const CoursePrevieComp = ({
               }}
               source={{
                 uri:
-                  vider_show?.video ||
+                  item?.demoUrl?.url ||
                   "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
               }}
               useNativeControls={true}
@@ -77,7 +79,9 @@ const CoursePrevieComp = ({
           </View>
 
           <View className="my-2">
-            <Text className="font-[PlusBold] text-[20px]">{item.title}</Text>
+            <Text className="font-[Plusregular] font-[700px] text-[20px] leading-[30px]">
+              {item.name}
+            </Text>
             <View className="flex-row items-center mt-1">
               <StarRatingDisplay
                 starSize={15}
@@ -88,7 +92,7 @@ const CoursePrevieComp = ({
               />
 
               <Text className="font-[InterRegular] mx-5 text-[12px] text-[#5B6871]">
-                {item.ratings.length} Ratings
+                {/* {item.ratings.length} Ratings */}
               </Text>
             </View>
             <View className="flex-row items-center mt-1">
@@ -111,58 +115,82 @@ const CoursePrevieComp = ({
             </View>
             <View className="flex-row">
               <Text className="text-[#A2A7A9] font-[PlusLight] text-[10px] leading-[15px]">
-                1234 members
+                {item.purchased} {item.purchased ? "members" : "member"}
               </Text>
               <Text className="text-[#A2A7A9] font-[PlusLight] text-[10px] leading-[15px] mx-2">
-                {item.lessons.length} lessons
+                {item.lessonData.length} lessons
               </Text>
               <Text className="text-[#A2A7A9] font-[PlusLight] text-[10px] leading-[15px]">
                 {" "}
                 certificate
               </Text>
             </View>
-            <View className="flex-row justify-around  bg-[#FDFDFE] my-4  rounded-md ">
-              {courseCategories.map((item, index) => (
-                <TouchableOpacity
-                  key={index}
-                  className=""
-                  onPress={() => {
-                    setCategoriesIndex(index);
-                  }}
-                >
-                  <Text
-                    className={`font-[Plusregular] text-[14px] text-[#A2A7A9] leading-[24px] px-9 py-2 text-center ${
-                      categoriesIndex == index && selectedText
-                    }`}
-                  >
-                    {item}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-            <View>
-              {categoriesIndex === 0 && <Details item={item} />}
-              {categoriesIndex === 1 && (
-                <Lessions item={item} selectLesson={selectLesson} />
-              )}
-              {categoriesIndex === 2 && (
-                <Reviews item={item} getAllUsers={getAllUsers} />
-              )}
-            </View>
           </View>
         </View>
       </View>
-      <View className="h-[0.5] bg-black" />
-      <View className="flex-row flex-1 h-[80] bg-white py-2 justify-center ">
-        <TouchableOpacity className="w-[64] h-[44] border items-center justify-center mx-3 rounded" onPress={()=>{
-          navigation.navigate("CartScreen", {item})
-        }}>
-          <Text>Icon</Text>
-        </TouchableOpacity>
-        <TouchableOpacity className="w-[287] h-[44] bg-[#1E1D2F] justify-center items-center rounded" >
-          <Text className="font-[PlusSemiBold] text-white">Enroll Now</Text>
-        </TouchableOpacity>
+      <View className="flex-row justify-around  bg-[#FDFDFE] my-4  rounded-md ">
+        {courseCategories.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            className=""
+            onPress={() => {
+              setCategoriesIndex(index);
+            }}
+          >
+            <Text
+              className={`font-[Plusregular] text-[14px] text-[#A2A7A9] leading-[24px] px-9 py-2 text-center ${
+                categoriesIndex == index && selectedText
+              }`}
+            >
+              {item}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </View>
+      <ScrollView>
+        <View className="px-6">
+          <View>
+            {categoriesIndex === 0 && <Details item={item} />}
+            {categoriesIndex === 1 && (
+              <Lessions item={item} selectLesson={selectLesson} />
+            )}
+            {categoriesIndex === 2 && (
+              <Reviews item={item} getAllUsers={getAllUsers} />
+            )}
+          </View>
+        </View>
+
+        <View className="h-[0.5] bg-black" />
+        {courseData ? (
+          <View className=" flex-1 h-[80] bg-white py-2 justify-center items-center ">
+            <TouchableOpacity
+              className="w-[287] h-[44] bg-[#1E1D2F] justify-center items-center rounded"
+              onPress={() => {}}
+            >
+              <Text className="font-[PlusSemiBold] text-white">Enrolled</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View className="flex-row flex-1 h-[80] bg-white py-2 justify-center ">
+            <TouchableOpacity
+              className="w-[64] h-[44] border items-center justify-center mx-3 rounded"
+              onPress={() => {
+                navigation.navigate("CartScreen", { item });
+              }}
+            >
+              <Text>Icon</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              className="w-[287] h-[44] bg-[#1E1D2F] justify-center  items-center rounded"
+              onPress={() => {
+                handlAddToCart(item);
+              }}
+            >
+              <Text className="font-[PlusSemiBold] text-white">Enroll Now</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </ScrollView>
     </>
   );
 };

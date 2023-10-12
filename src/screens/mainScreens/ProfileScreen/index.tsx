@@ -23,6 +23,7 @@ import { useQuery } from "react-query";
 import { getMeUser } from "../../../helper/api";
 import useAuthStore from "../../../stores";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
+import { storage } from "../../../mmkvStore";
 
 export type generalTypeData = {
   icon: React.JSX.Element;
@@ -36,9 +37,12 @@ const ProfileScreen = () => {
   const { setRequestIsLogged, requestLoggedIn, setAuthUser, authUser } =
     useAuthStore((state) => state);
 
-  console.log(requestLoggedIn, authUser, "authUser");
   //CALL USEQUERY
   const { isLoading, isError, error, data } = useQuery(["getme"], getMeUser);
+  
+  // console.log( data, "authUser888888888");
+
+
 
   //LOG OUT LOGIC
   const handleLogout = () => {
@@ -51,15 +55,19 @@ const ProfileScreen = () => {
       {
         text: "Ok",
         onPress: async () => {
-            Toast.show({
-              type: "success",
-              text1: authUser?.others?.name,
-              text2: "You've logging out"
-            });
-          await AsyncStorage.removeItem("token");
-          await AsyncStorage.removeItem("user");
-          setRequestIsLogged(false)
-          setAuthUser(null)
+          Toast.show({
+            type: "success",
+            text1: authUser?.others?.name,
+            text2: "You've logging out",
+          });
+          // await AsyncStorage.removeItem("token");
+          // await AsyncStorage.removeItem("user");
+          // delete all keys
+          storage.clearAll();
+          storage.delete("course-storage");
+          setRequestIsLogged(false);
+          setAuthUser(null);
+         
 
           console.log("removed");
         },
@@ -188,6 +196,7 @@ const ProfileScreen = () => {
         isError={isError}
         error={error}
         data={data}
+        authUser={authUser}
       />
     </ScrollView>
   );

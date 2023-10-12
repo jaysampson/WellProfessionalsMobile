@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import ViewProfileComp from '../../../components/mainComponents/ViewProfileComp'
+import ViewProfileComp from '../../../../components/mainComponents/ProfileScreenComp/ViewProfileComp'
 
 const ViewProfileScreen = () => {
    const [form, setForm] = React.useState<{ [key: string]: any }>({});

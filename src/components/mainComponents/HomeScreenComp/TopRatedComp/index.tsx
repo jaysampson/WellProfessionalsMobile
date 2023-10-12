@@ -27,7 +27,7 @@ const TopRatedComp = () => {
         <View className="w-[295px] h-[286px] mx-auto mt-8 mb-10">
           <View className="w-[295px] h-[176px]">
             <Image
-              source={require("../../../assets/img/top_rate_3.png")}
+              source={require("../../../../assets/img/top_rate_3.png")}
               style={{
                 width: "100%",
                 height: "100%",
@@ -43,7 +43,7 @@ const TopRatedComp = () => {
             <View className="flex-row items-center mt-1">
               <View className="h-4 w-4">
                 <Image
-                  source={require("../../../assets/img/top_rate_3.png")}
+                  source={require("../../../../assets/img/top_rate_3.png")}
                   style={{
                     width: "100%",
                     height: "100%",
@@ -84,7 +84,7 @@ const TopRatedComp = () => {
         {/* <View className="w-[295px] h-[286px] mx-auto mt-8 mb-10">
           <View className="w-[295px] h-[176px]">
             <Image
-              source={require("../../../assets/img/top_rate_3.png")}
+              source={require("../../../../assets/img/top_rate_3.png")}
               style={{
                 width: "100%",
                 height: "100%",
@@ -100,7 +100,7 @@ const TopRatedComp = () => {
             <View className="flex-row items-center mt-1">
               <View className="h-4 w-4">
                 <Image
-                  source={require("../../../assets/img/top_rate_3.png")}
+                  source={require("../../../../assets/img/top_rate_3.png")}
                   style={{
                     width: "100%",
                     height: "100%",

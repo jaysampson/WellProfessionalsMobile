@@ -10,8 +10,8 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import React from 'react'
 import { useNavigation } from "@react-navigation/native";
 import StarRating, { StarRatingDisplay } from "react-native-star-rating-widget";
-import CustomInput from "../../../components/customComponents/CustomInput";
-import CustomButton from "../../../components/customComponents/customButton";
+import CustomInput from "../../../../components/customComponents/CustomInput";
+import CustomButton from "../../../../components/customComponents/customButton";
 
 const CourseReviewScreen = () => {
   const navigation = useNavigation();
@@ -38,7 +38,7 @@ const CourseReviewScreen = () => {
       <View className="items-center">
         <View className="w-[343] h-[202] bg-red-500 rounded-lg  mx-auto mt-8">
           <Image
-            source={require("../../../assets/images/review_img.png")}
+            source={require("../../../../assets/images/review_img.png")}
             style={{
               width: "100%",
               height: "100%",

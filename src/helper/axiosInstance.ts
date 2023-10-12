@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import { storage } from "../mmkvStore";
 
 
 const ROOT_URL = "https://wellpro-server.onrender.com/api";
@@ -13,7 +14,8 @@ const axiosInstance = axios.create({
 });
 axiosInstance.interceptors.request.use(
   async (config) => {
-    const token = await AsyncStorage.getItem("token");
+    // const token = await AsyncStorage.getItem("token");
+    const token = storage.getString("token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

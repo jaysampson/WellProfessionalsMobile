@@ -1,13 +1,17 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../../screens/mainScreens/HomeScreen";
-import TopRatedScreen from "../../screens/mainScreens/TopRatedScreen";
-import TrendingScreen from "../../screens/mainScreens/TrendingScreen";
-import ViewProfileScreen from "../../screens/mainScreens/ViewProfileScreen";
-import CoursePreviewScreen from "../../screens/mainScreens/CoursePreviewScreen";
-import CourseReviewScreen from "../../screens/mainScreens/CourseReviewScreen";
-import AllCoursesScreen from "../../screens/mainScreens/AllCoursesScreen";
+
+import ViewProfileScreen from "../../screens/mainScreens/ProfileScreen/ViewProfileScreen";
+import CoursePreviewScreen from "../../screens/mainScreens/HomeScreen/CoursePreviewScreen";
+import CourseReviewScreen from "../../screens/mainScreens/HomeScreen/CourseReviewScreen";
+import AllCoursesScreen from "../../screens/mainScreens/HomeScreen/AllCoursesScreen";
 import CartScreen from "../../screens/mainScreens/CartScreen";
+import TopRatedScreen from "../../screens/mainScreens/HomeScreen/TopRatedScreen";
+import TrendingScreen from "../../screens/mainScreens/HomeScreen/TrendingScreen";
+import CourseCategories from "../../screens/mainScreens/HomeScreen/CourseCategories";
+import ListCategories from "../../components/mainComponents/HomeScreenComp/CourseCategoriseComp/ListCategories";
+import SearchScreen from "../../screens/mainScreens/SearchScreen";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -53,6 +57,21 @@ const HomeStackNavigators = () => {
         <HomeStack.Screen
           name="CartScreen"
           component={CartScreen}
+          options={{ headerShown: false }}
+        />
+        <HomeStack.Screen
+          name="CourseCategories"
+          component={CourseCategories}
+          options={{ headerShown: false }}
+        />
+        <HomeStack.Screen
+          name="ListCategories"
+          component={ListCategories}
+          options={{ headerShown: false }}
+        />
+        <HomeStack.Screen
+          name="SearchScreen"
+          component={SearchScreen}
           options={{ headerShown: false }}
         />
       </HomeStack.Group>

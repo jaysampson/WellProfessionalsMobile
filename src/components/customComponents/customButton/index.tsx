@@ -18,7 +18,7 @@ const CustomButton = ({
 }: ButtonType) => {
   const getBgColor = () => {
     if (disabled) return "bg-slate-300";
-    if (primary) return "bg-[#344054]";
+    if (primary) return "bg-[#1E1D2F]";
    
   };
 
