@@ -2,65 +2,57 @@ import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import AllCoursesComp from "../../../../components/mainComponents/HomeScreenComp/AllCoursesComp";
+import { useQuery } from "react-query";
+import { getAllCourses } from "../../../../helper/api";
+import useAuthStore from "../../../../stores";
+import useCourseCartStore from "../../../../stores/cartStores";
+import Toast from "react-native-toast-message";
 
 const AllCoursesScreen = () => {
-  const trendingData = [
-    {
-      img: require("../../../../assets/img/top_rate_3.png"),
-      author: "Lorem ipsum",
-      icon: <Ionicons name="checkmark-circle" size={11} color="black" />,
-      topic: "Reservoir Engineering Principles",
-      images: require("../../../../assets/img/top_rate_3.png"),
-      numberOfStudent: "888 Student",
-      amount: "N289.00",
-    },
-    {
-      img: require("../../../../assets/img/top_rate_3.png"),
-      author: "Lorem ipsum",
-      icon: <Ionicons name="checkmark-circle" size={11} color="black" />,
-      topic: "Health, Safety, and Environment in the Upstream",
-      images: require("../../../../assets/img/top_rate_3.png"),
-      numberOfStudent: "888 Student",
-      amount: "N289.00",
-    },
-    {
-      img: require("../../../../assets/img/top_rate_3.png"),
-      author: "Lorem ipsum",
-      icon: <Ionicons name="checkmark-circle" size={11} color="black" />,
-      topic: "Field Development Planning and Optimization",
-      images: require("../../../../assets/img/top_rate_3.png"),
-      numberOfStudent: "888 Student",
-      amount: "N289.00",
-    },
-    {
-      img: require("../../../../assets/img/top_rate_3.png"),
-      author: "Lorem ipsum",
-      icon: <Ionicons name="checkmark-circle" size={11} color="black" />,
-      topic: "Machine Learning in Oil and Gas",
-      images: require("../../../../assets/img/top_rate_3.png"),
-      numberOfStudent: "888 Student",
-      amount: "N289.00",
-    },
-    {
-      img: require("../../../../assets/img/top_rate_3.png"),
-      author: "Lorem ipsum",
-      icon: <Ionicons name="checkmark-circle" size={11} color="black" />,
-      topic: "Machine Learning in Oil and Gas",
-      images: require("../../../../assets/img/top_rate_3.png"),
-      numberOfStudent: "888 Student",
-      amount: "N289.00",
-    },
-    {
-      img: require("../../../../assets/img/top_rate_3.png"),
-      author: "Lorem ipsum",
-      icon: <Ionicons name="checkmark-circle" size={11} color="black" />,
-      topic: "Machine Learning in Oil and Gas",
-      images: require("../../../../assets/img/top_rate_3.png"),
-      numberOfStudent: "888 Student",
-      amount: "N289.00",
-    },
-  ];
-  return <AllCoursesComp trendingData={trendingData} />;
+  // const getCourses = useQuery(["course"], getAllCourses);
+  const { data, error, status, isLoading, isError } = useQuery(
+    ["course"],
+    getAllCourses
+  );
+
+  const { addToCartItem, getTotalAmount, coursesItem } = useCourseCartStore(
+    (state) => ({
+      addToCartItem: state.addToCartItem, 
+      getTotalAmount: state.getTotalAmount, 
+      coursesItem: state.coursesItem,
+    })
+  );
+
+
+  const handlAddToCart = (item) => {
+    const courseIsExist = coursesItem?.find((d) => d._id === item._id) 
+    if(courseIsExist){
+      Toast.show({
+        type: "info",
+        text1: `${courseIsExist.name} is Already added!`
+      });
+    } else{
+      addToCartItem(item);
+      getTotalAmount();
+    }
+    
+  };
+
+  const  authUser  = useAuthStore((state) => state.authUser);
+
+  const courseData = authUser.others.courses.map((d) => d._id);
+  console.log(courseData, "courseData")
+
+ 
+  return (
+    <AllCoursesComp
+      data={data}
+      error={error}
+      isLoading={isLoading}
+      isError={isError}
+      handlAddToCart={handlAddToCart}
+    />
+  );
 };
 
 export default AllCoursesScreen;

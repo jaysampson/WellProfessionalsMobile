@@ -4,30 +4,43 @@ import CoursePrevieComp from "../../../../components/mainComponents/HomeScreenCo
 import { useRoute } from "@react-navigation/native";
 import { getUsers } from "../../../../helper/api";
 import { useQuery } from "react-query";
+import Toast from "react-native-toast-message";
 import useAuthStore from "../../../../stores";
-import { useCartStore } from "../../../../stores/cartStores";
+import useCourseCartStore from "../../../../stores/cartStores";
 
 const CoursePreviewScreen = () => {
   const { params: { item = {} } = {} } = useRoute();
   // console.log(item, "item");
   const [categoriesIndex, setCategoriesIndex] = React.useState(0);
- 
-   const { authUser } = useAuthStore((state) => state);
 
-   const courseData = authUser.others.courses.find((d)=> d._id === item._id);
+  const authUser = useAuthStore((state) => state.authUser);
 
-const { addToCartItem, getTotalAmount } = useCartStore(
-  (state) => state
-);
-  
+  const courseData = authUser.others.courses.find((d) => d._id === item._id);
+
+  const { addToCartItem, getTotalAmount, coursesItem } = useCourseCartStore(
+    (state) => ({
+      addToCartItem: state.addToCartItem, 
+      getTotalAmount: state.getTotalAmount, 
+      coursesItem: state.coursesItem,
+    })
+  );
+
+  // console.log(coursesItem, "coursesItem")
+  // console.log(authUser, "authUser344")
 
   const handlAddToCart = (item) => {
-    // console.log(item, "item ggg");
-
-    addToCartItem(item);
-    getTotalAmount()
+    const courseIsExist = coursesItem?.find((d) => d._id === item._id) 
+    if(courseIsExist){
+      Toast.show({
+        type: "info",
+        text1: `${courseIsExist.name} Already added!`
+      });
+    } else{
+      addToCartItem(item);
+      getTotalAmount();
+    }
+    
   };
-
 
   // ########### averageRating ########
   // const totalRating = item.ratings.length;
@@ -39,7 +52,6 @@ const { addToCartItem, getTotalAmount } = useCartStore(
   // USESTATE
   const [rating, setRating] = React.useState(0);
   // ########### averageRating ########
-
 
   const courseCategories = ["Details", "Lessions", "Reviews"];
   const getAllUsers = useQuery(["getAllUsers"], getUsers);

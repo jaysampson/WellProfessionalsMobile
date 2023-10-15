@@ -35,7 +35,13 @@ export type generalTypeData = {
 const ProfileScreen = () => {
   const navigation = useNavigation();
   const { setRequestIsLogged, requestLoggedIn, setAuthUser, authUser } =
-    useAuthStore((state) => state);
+    useAuthStore((state) => ({
+      setRequestIsLogged: state.setRequestIsLogged,
+      requestLoggedIn: state.requestLoggedIn,
+      setAuthUser: state.setAuthUser,
+      authUser: state.authUser
+
+    }));
 
   //CALL USEQUERY
   const { isLoading, isError, error, data } = useQuery(["getme"], getMeUser);

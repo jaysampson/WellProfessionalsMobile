@@ -6,11 +6,15 @@ import { useMutation } from "react-query";
 import Toast from "react-native-toast-message";
 import { loginUser } from "../../../helper/api";
 import useAuthStore from "../../../stores";
-
+ 
 const LoginScreen = () => {
   const navigation = useNavigation();
   const { setRequestIsLogged, setAuthUser, authUser } = useAuthStore(
-    (state) => state
+    (state) => ({
+      setRequestIsLogged: state.setRequestIsLogged,
+      setAuthUser: state.setAuthUser,
+      authUser: state.authUser,
+    })
   );
   const [isSecureEntry, setIsSecureEntry] = React.useState(true);
   const [form, setForm] = React.useState<{ [key: string]: string }>({});
@@ -34,7 +38,7 @@ const LoginScreen = () => {
         setRequestIsLogged(true);
         setAuthUser(data);
       },
-      onError: (error) => {
+      onError: (error:any) => {
         console.log(error);
         Toast.show({
           type: "error",
@@ -49,11 +53,6 @@ const LoginScreen = () => {
   const onSubmit = () => {
     console.log(form);
     mutate(form);
-    // Toast.show({
-    //   type: "success",
-    //   text1: "Hello",
-    //   text2: "This is some something 👋",
-    // });
   };
 
   return (

@@ -3,32 +3,40 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { zustandStorage } from "../mmkvStore";
 
-
-export const useCartStore = create(
-  // persist(
-  (set, get) => ({
-    coursesItem: [],
+const courseCartStore = (set) =>({
+  coursesItem: [],
     totalAmount: 0,
-    addToCartItem: (item) =>
-      set((state) => ({ coursesItem: [...state.coursesItem, item] })),
 
-    removeFromCart: (itemId) =>
-      set((state) => ({
+    addToCartItem:(item)=>{
+      set((state) =>({
+        coursesItem: [...state.coursesItem, item]
+      }))
+    },
+    removeFromCart: (itemId) =>{
+      set((state)=>({
         coursesItem: state.coursesItem.filter((item) => item._id !== itemId),
-      })),
-
-    getTotalAmount: () =>
-      set((state) => ({
+      }))
+    }, 
+    getTotalAmount: ()=>{
+      set((state)=>({
         totalAmount: state.coursesItem.reduce(
           (total, item) => total + item.price,
           0
         ),
-      })),
-  })
+      }))
+    }
+})
 
-  // {
-  //   name: "user-storage", // unique name
-  //   storage: createJSONStorage(() => zustandStorage), // Add this here!
-  // }
-  // )
-);
+
+const useCourseCartStore = create(
+  persist(
+    courseCartStore,{
+      name: "user-storage", // unique name
+    storage: createJSONStorage(() => zustandStorage), // Add this here!
+    }
+  )
+)
+
+
+
+export default useCourseCartStore

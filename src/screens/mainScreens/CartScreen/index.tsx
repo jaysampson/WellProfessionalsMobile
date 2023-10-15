@@ -5,19 +5,28 @@ import { useMutation, useQuery } from "react-query";
 import { createPaymentIntent, getAllCourses } from "../../../helper/api";
 import { useStripe } from "@stripe/stripe-react-native";
 import useAuthStore from "../../../stores";
-import { useCartStore } from "../../../stores/cartStores";
+import useCourseCartStore from "../../../stores/cartStores";
 
 const CartScreen = () => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const authUser = useAuthStore((state) => state.authUser);
   const user_Id = authUser.others._id;
 
-  const { coursesItem, removeFromCart, getTotalAmount, totalAmount } =
-    useCartStore((state) => state);
+  // const { coursesItem, removeFromCart, getTotalAmount, totalAmount } =
+  //   useCartStore((state) => state);
+
+    const { coursesItem, getTotalAmount, removeFromCart, totalAmount } = useCourseCartStore(
+      (state) => ({
+        coursesItem: state.coursesItem, 
+        getTotalAmount: state.getTotalAmount, 
+        removeFromCart: state.removeFromCart,
+        totalAmount:state.totalAmount,
+      })
+    );
 
   // console.log( JSON.stringify(coursesItem), "authUser");
 
-  const handleRemoveFromCart = (item) => {
+  const handleRemoveFromCart = (item:object) => {
     removeFromCart(item);
     getTotalAmount();
   };
