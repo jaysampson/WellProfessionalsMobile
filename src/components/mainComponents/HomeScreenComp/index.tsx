@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { SearchIcon } from "../../../helper/Icon";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
+import Spinner from "react-native-loading-spinner-overlay";
 import useAuthStore from "../../../stores";
 
 const { width } = Dimensions.get("window");
@@ -32,6 +33,11 @@ const HomeScreenComp = ({
   const navigation = useNavigation();
   return (
     <>
+    <Spinner
+        visible={isLoading}
+        // textContent={"Loading..."}
+        // textStyle={styles.spinnerTextStyle}
+      />
       <View className="py-10 px-6  bg-[#1E1D2F]">
         <View className="flex-row mt-5 justify-between">
           {isLoading && requestLoggedIn && (
