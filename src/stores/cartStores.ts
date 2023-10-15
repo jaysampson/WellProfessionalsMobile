@@ -25,9 +25,6 @@ const courseCartStore = (set) =>({
         ),
       }))
     }
-
-
-    
 })
 
 

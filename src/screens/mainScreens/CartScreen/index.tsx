@@ -26,7 +26,7 @@ const CartScreen = () => {
 
   // console.log( JSON.stringify(coursesItem), "authUser");
 
-  const handleRemoveFromCart = (item) => {
+  const handleRemoveFromCart = (item:object) => {
     removeFromCart(item);
     getTotalAmount();
   };

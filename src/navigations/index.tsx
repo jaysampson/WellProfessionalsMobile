@@ -16,7 +16,13 @@ import { storage } from "../mmkvStore";
 
 const AppNavigation = () => {
   const { setRequestIsLogged,requestLoggedIn, setAuthUser, authUser } = useAuthStore(
-    (state) => state
+    (state) =>({
+      setRequestIsLogged: state.setRequestIsLogged,
+      requestLoggedIn:state.requestLoggedIn,
+      setAuthUser:state.setAuthUser,
+      authUser: state.authUser
+
+    })
   );
 
   const { isLoading, isError, error, data } = useQuery(["getme"], getMeUser,{
