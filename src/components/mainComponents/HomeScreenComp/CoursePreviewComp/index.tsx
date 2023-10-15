@@ -167,7 +167,7 @@ const CoursePrevieComp = ({
               className="w-[287] h-[44] bg-[#1E1D2F] justify-center items-center rounded"
               onPress={() => {}}
             >
-              <Text className="font-[PlusSemiBold] text-white">Enrolled</Text>
+              <Text className="font-[PlusSemiBold] text-white">Go to Course</Text>
             </TouchableOpacity>
           </View>
         ) : (
