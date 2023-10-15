@@ -15,8 +15,9 @@ type LoginType = {
   isChecked: boolean;
   setChecked: (value: boolean) => void;
   isSecureEntry: boolean;
-  setIsSecureEntry: () => void;
+  setIsSecureEntry: (prev:boolean) => void;
   onSubmit: () => void;
+  isLoading: boolean;
 };
 
 const LoginComp = ({

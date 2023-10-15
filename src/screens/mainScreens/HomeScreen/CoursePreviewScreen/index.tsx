@@ -13,7 +13,7 @@ const CoursePreviewScreen = () => {
   // console.log(item, "item");
   const [categoriesIndex, setCategoriesIndex] = React.useState(0);
 
-  const { authUser } = useAuthStore((state) => state);
+  const authUser = useAuthStore((state) => state.authUser);
 
   const courseData = authUser.others.courses.find((d) => d._id === item._id);
 

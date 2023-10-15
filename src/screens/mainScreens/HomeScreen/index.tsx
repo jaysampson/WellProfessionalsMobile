@@ -12,14 +12,20 @@ const HomeScreen = () => {
   const getCourses = useQuery(["course"], getAllCourses);
 
   const { setRequestIsLogged, requestLoggedIn, setAuthUser, authUser } =
-    useAuthStore((state) => state);
+    useAuthStore((state) => ({
+      setRequestIsLogged: state.setRequestIsLogged,
+      requestLoggedIn: state.requestLoggedIn,
+      setAuthUser: state.setAuthUser,
+      authUser: state.authUser
+
+    }));
 
   // console.log(authUser, requestLoggedIn, "requestLoggedIn");
 
   // console.log(authUser, "authUser");
   //GET TRENDING COURSES
   const getTopTrendingCourses = getCourses?.data?.getCourse.filter(
-    (d) => d.purchased > 0
+    (d:any) => d.purchased > 0
   );
 
 
