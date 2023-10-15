@@ -16,12 +16,14 @@ const CoursePreviewScreen = () => {
 
    const courseData = authUser.others.courses.find((d)=> d._id === item._id);
 
- 
-const { addToCartItem, getTotalAmount } = useCartStore((state) => state);
+const { addToCartItem, getTotalAmount } = useCartStore(
+  (state) => state
+);
   
 
   const handlAddToCart = (item) => {
     // console.log(item, "item ggg");
+
     addToCartItem(item);
     getTotalAmount()
   };
