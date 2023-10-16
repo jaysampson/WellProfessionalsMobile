@@ -9,7 +9,7 @@ import useCourseCartStore from "../../../../stores/cartStores";
 import Toast from "react-native-toast-message";
 
 const AllCoursesScreen = () => {
-  // const getCourses = useQuery(["course"], getAllCourses);
+  const authUser = useAuthStore((state) => state.authUser);
   const { data, error, status, isLoading, isError } = useQuery(
     ["course"],
     getAllCourses
@@ -34,14 +34,18 @@ const AllCoursesScreen = () => {
     } else{
       addToCartItem(item);
       getTotalAmount();
+      Toast.show({
+        type: "success",
+        text1: `${item.name} added to cart`,
+        
+      });
     }
     
   };
 
-  const  authUser  = useAuthStore((state) => state.authUser);
 
-  const courseData = authUser.others.courses.map((d) => d._id);
-  console.log(courseData, "courseData")
+  // const courseData = authUser.others.courses.map((d) => d._id);
+  // console.log(authUser, "courseData");
 
  
   return (
@@ -51,6 +55,7 @@ const AllCoursesScreen = () => {
       isLoading={isLoading}
       isError={isError}
       handlAddToCart={handlAddToCart}
+      authUser={authUser}
     />
   );
 };

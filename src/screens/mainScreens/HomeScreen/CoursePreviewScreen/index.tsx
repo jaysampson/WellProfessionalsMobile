@@ -38,6 +38,10 @@ const CoursePreviewScreen = () => {
     } else{
       addToCartItem(item);
       getTotalAmount();
+      Toast.show({
+        type: "success",
+        text1: `Added successfully!`,
+      });
     }
     
   };

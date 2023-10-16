@@ -165,7 +165,9 @@ const CoursePrevieComp = ({
           <View className=" flex-1 h-[80] bg-white py-2 justify-center items-center ">
             <TouchableOpacity
               className="w-[287] h-[44] bg-[#1E1D2F] justify-center items-center rounded"
-              onPress={() => {}}
+              onPress={() => {
+                navigation.navigate("MyCoursesScreen", {item})
+              }}
             >
               <Text className="font-[PlusSemiBold] text-white">Go to Course</Text>
             </TouchableOpacity>

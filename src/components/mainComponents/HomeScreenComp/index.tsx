@@ -28,12 +28,13 @@ const HomeScreenComp = ({
   authUser,
   requestLoggedIn,
   getTopTrendingCourses,
+  isError,
 }) => {
   console.log(authUser?.others?.name, "name");
   const navigation = useNavigation();
   return (
     <>
-    <Spinner
+      <Spinner
         visible={isLoading}
         // textContent={"Loading..."}
         // textStyle={styles.spinnerTextStyle}
@@ -45,9 +46,9 @@ const HomeScreenComp = ({
               Loading...
             </Text>
           )}
-          {error && (
+          {isError && (
             <Text className="text-[18px] text-white font-[700] leading-[32px] font-[Plusregular]">
-              {/* {error} */}
+              {/* {error.AxiosError} */}
             </Text>
           )}
           {!isLoading && !error && (
@@ -55,6 +56,11 @@ const HomeScreenComp = ({
               Hello {data?.others?.name || authUser?.others?.name}
             </Text>
           )}
+          {/* {requestLoggedIn &&  (
+            <Text className="text-[18px] text-white font-[700] leading-[32px] font-[Plusregular]">
+              Hello { authUser?.others?.name}
+            </Text>
+          )} */}
 
           <TouchableOpacity className="" onPress={() => {}}>
             <Ionicons name="notifications-outline" size={24} color="#ffff" />
@@ -62,9 +68,12 @@ const HomeScreenComp = ({
         </View>
 
         <View className="flex-row h-14 mt-7 border border-gray-300 rounded-md items-center ">
-          <TouchableOpacity className="w-32 h-11 items-center justify-center bg-[#1E1D2F]" onPress={()=>{
-            navigation.navigate("CourseCategories")
-          }}>
+          <TouchableOpacity
+            className="w-32 h-11 items-center justify-center bg-[#1E1D2F]"
+            onPress={() => {
+              navigation.navigate("CourseCategories");
+            }}
+          >
             <Text className="text-[14px] text-white font-[500] leading-[17px] font-[Plusregular]">
               Categories
             </Text>
@@ -118,7 +127,7 @@ const HomeScreenComp = ({
         </View>
         <View className="py-10">
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {getCourses?.data?.getCourse?.map((item) => (
+            {getCourses?.data?.getCourse?.slice(0, 5).map((item) => (
               <View className=" flex-row">
                 <TouchableOpacity
                   key={item.id}

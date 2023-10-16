@@ -8,7 +8,7 @@ import HomeScreenComp from "../../../components/mainComponents/HomeScreenComp";
 
 const HomeScreen = () => {
   //CALL USEQUERY
-  const { isLoading, error, data } = useQuery(["getme"], getMeUser);
+  const { isLoading, error, data, isError } = useQuery(["getme"], getMeUser);
   const getCourses = useQuery(["course"], getAllCourses);
 
   const { setRequestIsLogged, requestLoggedIn, setAuthUser, authUser } =
@@ -20,9 +20,7 @@ const HomeScreen = () => {
 
     }));
 
-  // console.log(authUser, requestLoggedIn, "requestLoggedIn");
-
-  // console.log(authUser, "authUser");
+ 
   //GET TRENDING COURSES
   const getTopTrendingCourses = getCourses?.data?.getCourse.filter(
     (d:any) => d.purchased > 0
@@ -80,6 +78,7 @@ const HomeScreen = () => {
       authUser={authUser}
       requestLoggedIn={requestLoggedIn}
       getTopTrendingCourses={getTopTrendingCourses}
+      isError={isError}
     />
   );
 };

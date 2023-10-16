@@ -41,24 +41,24 @@ const ListCategories = () => {
         </View>
         <ScrollView className=" mt-4">
           <TouchableOpacity className=" w-[363px] h-[118px]  flex-row items-center">
-            <View className=" w-[145px] h-[98.88px] mt-[12px] m-[10px]">
+            <View className=" w-[145px] h-[98.88px]  m-[10px]">
               <Image
                 source={require("../../../../../assets/img/category.png")}
                 style={{
                   width: "100%",
                   height: "100%",
-                  // borderRadius: 12,
+                  borderRadius: 10,
                 }}
               />
             </View>
-            <View className="w-[188px] h-[98.88px]">
-              <Text className="text-[12px] font-[700] font-[Plusregular] leading-[20px]">
+            <View className="w-[188px] h-[98.88px] rounded  ">
+              <Text className="text-[11px] font-[700] font-[Plusregular] leading-[20px]">
                 Reservoir Engineering Principles
               </Text>
               <Text className="text-[7px] font-[700] font-[Plusregular] text-[#242E21] leading-normal my-1">
                 867+ Students
               </Text>
-              <View className=" flex-row items-center my-2">
+              <View className=" flex-row items-center my-1">
                 <Text className="text-[10px] font-[700] font-[Plusregular] mr-2 leading-[18px]">
                   ₦2000.99
                 </Text>
@@ -72,8 +72,8 @@ const ListCategories = () => {
                     Add to cart
                   </Text>
                 </TouchableOpacity>
-                <TouchableOpacity className=" w-[14px] h-[14px] border  border-[#CBCBCB] ">
-                  <EvilIcons name="heart" size={14} color="#292D32" />
+                <TouchableOpacity className=" w-[14.133px] h-[14.133px] border  border-[#CBCBCB] items-center justify-center ">
+                  <EvilIcons name="heart" size={13} color="#292D32" />
                 </TouchableOpacity>
               </View>
             </View>
