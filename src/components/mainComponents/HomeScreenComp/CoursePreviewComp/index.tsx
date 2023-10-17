@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, Button, ScrollView } from "react-native";
 import React from "react";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { WebView } from "react-native-webview";
 import { Video, ResizeMode } from "expo-av";
 import StarRating, { StarRatingDisplay } from "react-native-star-rating-widget";
 import Details from "../../../previewCategoriesComp/Details";
@@ -49,7 +50,7 @@ const CoursePrevieComp = ({
         </View>
         <View>
           <View className="w-[343] h-[193] rounded-md bg-red-500 relative mt-3">
-            <Video
+            {/* <Video
               ref={video}
               resizeMode={ResizeMode.CONTAIN}
               style={{
@@ -61,10 +62,21 @@ const CoursePrevieComp = ({
               source={{
                 uri:
                   item?.demoUrl?.url ||
+                  // 'https://drive.google.com/file/d/1k3ayG8rNgaQ1-9DZlk6VABBRO3AK7xWo/preview' ||
                   "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
               }}
               useNativeControls={true}
               isLooping={true}
+            /> */}
+            <WebView
+              // style={styles.container}
+              source={{
+                uri: `https://drive.google.com/file/d/${item.demoUrl}/preview`,
+              }}
+              // originWhitelist={["*"]}
+              // source={{
+              //   html: '<iframe src="https://drive.google.com/file/d/1k3ayG8rNgaQ1-9DZlk6VABBRO3AK7xWo/preview" width="100%" height="100%" allow="autoplay"></iframe>',
+              // }}
             />
           </View>
           <View className="absolute top-20 left-5">
@@ -99,7 +111,7 @@ const CoursePrevieComp = ({
               <Text className="font-[PlusMedium] text-[12px] mr-2 text-[#CD760F] mr-2s">
                 {
                   getAllUsers?.data?.usersData?.find(
-                    (d) => d._id === item.instructor
+                    (d:any) => d._id === item.instructor
                   )?.name
                 }
               </Text>
@@ -129,7 +141,7 @@ const CoursePrevieComp = ({
         </View>
       </View>
       <View className="flex-row justify-around  bg-[#FDFDFE] my-4  rounded-md ">
-        {courseCategories.map((item, index) => (
+        {courseCategories.map((item, index:number) => (
           <TouchableOpacity
             key={index}
             className=""
@@ -166,10 +178,12 @@ const CoursePrevieComp = ({
             <TouchableOpacity
               className="w-[287] h-[44] bg-[#1E1D2F] justify-center items-center rounded"
               onPress={() => {
-                navigation.navigate("MyCoursesScreen", {item})
+                navigation.navigate("MyCoursesScreen", { item });
               }}
             >
-              <Text className="font-[PlusSemiBold] text-white">Go to Course</Text>
+              <Text className="font-[PlusSemiBold] text-white">
+                Go to Course
+              </Text>
             </TouchableOpacity>
           </View>
         ) : (

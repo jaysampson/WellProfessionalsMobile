@@ -10,7 +10,7 @@ import useCourseCartStore from "../../../../stores/cartStores";
 
 const CoursePreviewScreen = () => {
   const { params: { item = {} } = {} } = useRoute();
-  // console.log(item, "item");
+  console.log(item, "item");
   const [categoriesIndex, setCategoriesIndex] = React.useState(0);
 
   const authUser = useAuthStore((state) => state.authUser);

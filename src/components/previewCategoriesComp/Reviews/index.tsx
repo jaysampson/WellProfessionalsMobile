@@ -11,9 +11,12 @@ const Reviews = ({ item, getAllUsers }) => {
   return (
     <View>
       <Text className="font-[PlusBold] text-[18px] mb-4">Comments</Text>
-      <TouchableOpacity className="flex-row" onPress={()=>{
-        navigation.navigate("CourseReviewScreen")
-      }}>
+      <TouchableOpacity
+        className="flex-row"
+        onPress={() => {
+          navigation.navigate("CourseReviewScreen");
+        }}
+      >
         <View className="flex-1 w-[295px]h-[40px]  border border-[#D0D5DD]">
           <Text className="text-[#64748B] p-4">
             Write a comment here, be nice...
@@ -24,7 +27,7 @@ const Reviews = ({ item, getAllUsers }) => {
         </View>
       </TouchableOpacity>
       <View className="mt-5">
-        {item.ratings.map((item) => (
+        {item.review.map((item) => (
           <View className="h-[299px] bg-white">
             <View className="items-center m-5 flex-row">
               <View className="w-[40px] h-[40px] rounded-full">

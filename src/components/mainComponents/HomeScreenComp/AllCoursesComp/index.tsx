@@ -10,7 +10,8 @@ type AllCoursesCompType = {
   isLoading: boolean;
   isError: boolean;
   handlAddToCart: (item: object) => void;
-  authUser: () => {};
+  authUser: () => void;
+  handleOnClick: (item: object)=> void;
 };
 
 const AllCoursesComp = ({
@@ -20,6 +21,7 @@ const AllCoursesComp = ({
   isError,
   handlAddToCart,
   authUser,
+  handleOnClick,
 }: AllCoursesCompType) => {
   const navigation = useNavigation();
 
@@ -54,9 +56,14 @@ const AllCoursesComp = ({
             data={data.getCourse}
             numColumns={2}
             showsVerticalScrollIndicator={false}
-            //   keyExtractor={(item) => String(item.id)}
+            // keyExtractor={(item) => String(item.id)}
             renderItem={({ item }) => (
-              <View className="w-[161px] h-[260] mx-3 mt-4">
+              <TouchableOpacity
+                className="w-[161px] h-[260] mx-3 mt-4"
+                onPress={() => {
+                  handleOnClick(item)
+                }}
+              >
                 <View className="w-[161px] h-[260px]">
                   <View className="h-[102px]">
                     <Image
@@ -99,7 +106,7 @@ const AllCoursesComp = ({
                     className="w-[89] h-[28]  border justify-center items-center rounded-lg"
                     onPress={() => {
                       authUser?.others?.courses.find((d) => d._id === item._id)
-                        ? navigation.navigate("MyCoursesScreen", {item})
+                        ? navigation.navigate("MyCoursesScreen", { item })
                         : handlAddToCart(item);
                     }}
                   >
@@ -110,7 +117,7 @@ const AllCoursesComp = ({
                     </Text>
                   </TouchableOpacity>
                 </View>
-              </View>
+              </TouchableOpacity>
             )}
           />
 

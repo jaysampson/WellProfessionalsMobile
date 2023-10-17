@@ -56,9 +56,11 @@ const Lessions = ({ item, selectLesson }) => {
   ];
   return (
     <View>
-      <Text className="font-[PlusBold] text-[18px] mb-4">{item?.lessons?.length} Lessons</Text>
+      <Text className="font-[PlusBold] text-[18px] mb-4">
+        {item?.lessonData?.length} Lessons
+      </Text>
       <View>
-        {item?.courseData?.map((item, index) => (
+        {item?.lessonData?.map((item, index:number) => (
           <TouchableOpacity
             key={index}
             className="flex-row items-center justify-between bg-white p-4 rounded-lg my-1"
@@ -75,7 +77,7 @@ const Lessions = ({ item, selectLesson }) => {
                   {item.title}
                 </Text>
                 <Text className="font-[PlusMedium] text-[10px] text-[#CCCCCC]">
-                  {item.time}
+                  {item.videoLength}
                 </Text>
               </View>
             </View>

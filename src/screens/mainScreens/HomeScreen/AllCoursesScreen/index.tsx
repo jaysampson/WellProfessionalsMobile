@@ -7,8 +7,10 @@ import { getAllCourses } from "../../../../helper/api";
 import useAuthStore from "../../../../stores";
 import useCourseCartStore from "../../../../stores/cartStores";
 import Toast from "react-native-toast-message";
+import { useNavigation } from "@react-navigation/native";
 
 const AllCoursesScreen = () => {
+  const navigation = useNavigation()
   const authUser = useAuthStore((state) => state.authUser);
   const { data, error, status, isLoading, isError } = useQuery(
     ["course"],
@@ -47,6 +49,10 @@ const AllCoursesScreen = () => {
   // const courseData = authUser.others.courses.map((d) => d._id);
   // console.log(authUser, "courseData");
 
+  const handleOnClick=(item:object)=>{
+    navigation.navigate("CoursePreviewScreen", {item});
+  }
+
  
   return (
     <AllCoursesComp
@@ -56,6 +62,7 @@ const AllCoursesScreen = () => {
       isError={isError}
       handlAddToCart={handlAddToCart}
       authUser={authUser}
+      handleOnClick={handleOnClick}
     />
   );
 };
