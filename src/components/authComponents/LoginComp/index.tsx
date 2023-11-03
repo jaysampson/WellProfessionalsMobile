@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import CustomInput from "../../customComponents/CustomInput";
 import CustomButton from "../../customComponents/customButton";
@@ -38,26 +38,30 @@ const LoginComp = ({
         // textContent={"Loading..."}
         // textStyle={styles.spinnerTextStyle}
       />
-      <View className="py-10 px-6 my-5">
-        <View className="flex-row justify-between">
-          <TouchableOpacity
-            className="w-25 h-6 border border-gray-300"
-            onPress={() => {
-              navigation.goBack();
-            }}
-          >
-            <MaterialIcons name="keyboard-arrow-left" size={24} color="black" />
-          </TouchableOpacity>
-          <Text className="text-lg font-[PlusSemiBold]">Log in</Text>
-          <View />
-        </View>
-        <View className="py-8">
-          <View className="mb-10">
-            <Text className="text-2xl font-[PlusBold]">Welcome back,</Text>
-            <Text className="text-[#6C7072] text-xs font-[Plusregular]">
-              Good to see you again.
-            </Text>
+      <View className=" flex-1 bg-white">
+        <View className="p-5">
+          <View className="h-28  my-11 items-center">
+            <View className=" w-20 h-16 p-px">
+              <Image
+                source={require("../../../assets/images/logo_2.png")}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  resizeMode: "contain",
+                  //   borderRadius: 100,
+                }}
+              />
+            </View>
+            <View className="items-center">
+              <Text className="text-2xl font-bold leading-8">
+                Welcome back,
+              </Text>
+              <Text className="leading-4 font-normal text-xs text-[#6C7072]">
+                Good to see you again!
+              </Text>
+            </View>
           </View>
+
           <CustomInput
             label="Email Address"
             // value={value}
@@ -86,16 +90,16 @@ const LoginComp = ({
                 {/* <FontAwesome5 name="eye" size={24} color="black" /> */}
 
                 {isSecureEntry ? (
-                  <FontAwesome5 name="eye-slash" size={24} color="black" />
+                  <FontAwesome5 name="eye-slash" size={24} color="#6C7072" />
                 ) : (
-                  <FontAwesome5 name="eye" size={24} color="black" />
+                  <FontAwesome5 name="eye" size={24} color="#6C7072" />
                 )}
               </TouchableOpacity>
             }
             iconPostion="right"
             // style={styles.input}
           />
-          <View className="flex-row items-center justify-between">
+          <View className="flex-row items-center justify-between my-5">
             <View className="flex-row">
               <Checkbox
                 className="border"
@@ -118,7 +122,15 @@ const LoginComp = ({
             </TouchableOpacity>
           </View>
 
-          <View className="pt-10  mb-20">
+          <CustomButton
+            primary
+            title="Login"
+            loading={isLoading}
+            disabled={isLoading}
+            onPress={onSubmit}
+          />
+
+          <View className="pt-10 ">
             <View className="flex-row items-center mx-auto">
               <View className="h-0.5 w-20 bg-slate-400" />
               <Text className="mx-3">OR</Text>
@@ -126,7 +138,6 @@ const LoginComp = ({
             </View>
             <View className="mt-2">
               <TouchableOpacity className=" flex-row w-full h-11 border border-gray-300  items-center justify-center rounded-lg my-3">
-                {/* <FontAwesome5 name="google" size={24} color="#34A853" /> */}
                 <GoogleIcon />
 
                 <Text className="mx-3 text-base text-[#344054] font-[Plusregular]">
@@ -142,13 +153,17 @@ const LoginComp = ({
             </View>
           </View>
 
-          <CustomButton
-            primary
-            title="Login"
-            loading={isLoading}
-            disabled={isLoading}
-            onPress={onSubmit}
-          />
+          <Text className="text-center font-[Plusregular] py-7">
+            Already have an Account?
+            <Text
+              className="text-[#CD760F]"
+              onPress={() => {
+                navigation.navigate("Register");
+              }}
+            >
+              Sign Up Now
+            </Text>
+          </Text>
         </View>
       </View>
     </>

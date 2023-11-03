@@ -8,6 +8,7 @@ import AppNavigation from "./src/navigations";
 import { StripeProvider } from "@stripe/stripe-react-native";
 import { useFonts } from "expo-font";
 import { QueryClient, QueryClientProvider } from "react-query";
+
 SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient();

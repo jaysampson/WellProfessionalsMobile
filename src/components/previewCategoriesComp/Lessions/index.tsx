@@ -3,7 +3,7 @@ import React from 'react'
 import { EvilIcons, MaterialIcons } from "@expo/vector-icons";
 
 const Lessions = ({ item, selectLesson }) => {
-  console.log(item, "item")
+  // console.log(item, "item")
   const dataOne = [
     {
       icon: <EvilIcons name="lock" size={24} color="black" />,
@@ -63,7 +63,7 @@ const Lessions = ({ item, selectLesson }) => {
         {item?.lessonData?.map((item, index:number) => (
           <TouchableOpacity
             key={index}
-            className="flex-row items-center justify-between bg-white p-4 rounded-lg my-1"
+            className="flex-row items-center justify-between bg-white p-4 shadow shadow-black/30 rounded-lg my-1"
             onPress={() => {
               selectLesson(item._id);
             }}

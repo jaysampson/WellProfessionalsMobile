@@ -56,7 +56,7 @@ const LoginScreen = () => {
   };
 
   return (
-    <ScrollView>
+    
       <LoginComp
         isChecked={isChecked}
         setChecked={setChecked}
@@ -67,7 +67,7 @@ const LoginScreen = () => {
         isLoading={isLoading}
         setIsSecureEntry={setIsSecureEntry}
       />
-    </ScrollView>
+  
   );
 };
 

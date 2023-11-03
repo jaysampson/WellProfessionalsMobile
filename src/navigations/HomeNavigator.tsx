@@ -7,6 +7,7 @@ import { HomeStackParamList } from '../types/navigations';
 import ProfileStackNavigators from './rootStackNavigators/ProfileStackNavigators';
 import CartScreen from '../screens/mainScreens/CartScreen';
 import SearchScreen from '../screens/mainScreens/SearchScreen';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 
 const HomeStack = ()=>{}
@@ -20,6 +21,23 @@ function DummyScreen() {
 
 
 const HomeNavigator = () => {
+
+
+   const getTabBarVisibility = (route) => {
+     const routeName = getFocusedRouteNameFromRoute(route) ?? "Home";
+     if (
+       routeName === "CoursePreviewScreen" 
+      
+     ) {
+       return "none";
+     }
+     return "flex";
+   };
+
+
+
+
+
   return (
     <>
       <Tab.Navigator
@@ -62,12 +80,20 @@ const HomeNavigator = () => {
         <Tab.Screen
           name="Home"
           component={HomeStackNavigators}
-          options={{
-            tabBarIcon: ({ color, size, focused }) => (
+          // options={{
+          //   tabBarIcon: ({ color, size, focused }) => (
+          //     <HomeIcon size={size} color={color} />,
+          //     // tabBarShowLabel: false,
+          //     tabBarStyle: { display: getTabBarVisibility(route) },
+          //   ),
+          // }}
+          options={({ route }) => ({
+            tabBarLabel: "Home",
+            tabBarStyle: { display: getTabBarVisibility(route) },
+             tabBarIcon: ({ color, size, focused }) => (
               <HomeIcon size={size} color={color} />
-              // tabBarShowLabel: false,
-            ),
-          }}
+             )
+          })}
         />
         <Tab.Screen
           name="Featured"

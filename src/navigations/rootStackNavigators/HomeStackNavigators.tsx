@@ -13,6 +13,7 @@ import CourseCategories from "../../screens/mainScreens/HomeScreen/CourseCategor
 import ListCategories from "../../components/mainComponents/HomeScreenComp/CourseCategoriseComp/ListCategories";
 import SearchScreen from "../../screens/mainScreens/SearchScreen";
 import MyCoursesScreen from "../../screens/mainScreens/HomeScreen/MyCoursesScreen";
+import MylessonsScreen from "../../screens/mainScreens/HomeScreen/MylessonsScreen";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -78,6 +79,11 @@ const HomeStackNavigators = () => {
         <HomeStack.Screen
           name="MyCoursesScreen"
           component={MyCoursesScreen}
+          options={{ headerShown: false }}
+        />
+        <HomeStack.Screen
+          name="MylessonsScreen"
+          component={MylessonsScreen}
           options={{ headerShown: false }}
         />
       </HomeStack.Group>

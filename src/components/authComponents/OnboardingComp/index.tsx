@@ -15,16 +15,19 @@ import { TypeSlider } from "../../../types/authTypes";
 
 const { width, height } = Dimensions.get("window");
 
+
+
 const OnboardinComp: React.FC<{ slider: TypeSlider[] }> = ({ slider }) => {
   const navigation = useNavigation();
   const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);
 
-  const ref = React.useRef<number | any>(null);
+  const ref = React.useRef(null);
 
   const updateCurrentSlideIndex = (
     e: NativeSyntheticEvent<NativeScrollEvent>
   ) => {
     const contentOffsetX = e.nativeEvent.contentOffset.x;
+    // console.log(contentOffsetX, "contentOffsetX");
     const currentIndex = Math.round(contentOffsetX / width);
     setCurrentSlideIndex(currentIndex);
     // console.log(currentIndex, "currentIndex");
@@ -34,8 +37,7 @@ const OnboardinComp: React.FC<{ slider: TypeSlider[] }> = ({ slider }) => {
     const offSet = lastSlideIndex * width;
     ref?.current?.scrollToOffset({ offSet });
     setCurrentSlideIndex(lastSlideIndex);
-    // console.log(lastSlideIndex, "lastSlideIndex");
-    // console.log(ref.current, "scrollToOffset");
+   
   };
 
   const Footer = () => {
@@ -56,7 +58,7 @@ const OnboardinComp: React.FC<{ slider: TypeSlider[] }> = ({ slider }) => {
         <View className="">
           {currentSlideIndex == slider.length - 1 ? (
             <TouchableOpacity
-              className="w-40 h-12 bg-primary-100 items-center justify-center rounded-md  mr-10"
+              className=" items-center justify-center rounded-md bg-[#AF5E41] px-[38px] py-[16px]  mr-10"
               onPress={() => {
                 navigation.navigate("Register");
               }}
@@ -84,53 +86,63 @@ const OnboardinComp: React.FC<{ slider: TypeSlider[] }> = ({ slider }) => {
 
   return (
     <View className="flex-1 bg-dark-blue">
-      <View>
-        <ImageBackground
-          source={require("../../../assets/images/bg_img.png")}
-          style={{ width: "100%", height: "100%" }}
-        >
-          <View className="px-3">
+      <ImageBackground
+        source={require("../../../assets/images/bg_img.png")}
+        className="w-full h-full"
+        // style={{width:"100%", height: "100%"}}
+      >
+        <View className=" flex-row items-center mx-auto">
+          <View className=" w-[54px] h-[40px] ">
             <Image
-              source={require("../../../assets/images/logo_1.png")}
+              source={require("../../../assets/images/logo.png")}
               style={{
-                width: 297,
-                height: 40,
-                marginHorizontal: 39,
-                marginVertical: 50,
+                width: "100%",
+                height: "100%",
               }}
             />
           </View>
+          <Text className="text-[16px] font-[700] leading-[30px] font-[Plusregular] tracking-[3px] uppercase text-[#AFBCCB] my-10">
+            Well Professionals
+          </Text>
+        </View>
+        <View className="">
           <FlatList
-            ref={ref}
+          ref={ref}
             data={slider}
             horizontal
             pagingEnabled
             onMomentumScrollEnd={updateCurrentSlideIndex}
-            contentContainerStyle={{ height: height * 75 }}
             showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ height: height * 0.75 }}
             renderItem={({ item }) => (
-              <>
-                <View className="">
-                  <Image
-                    source={item.img}
-                    resizeMode="contain"
-                    style={{ height: 350, width }}
-                  />
-                  <Text className=" w-96 text-white text-5xl  font-[PlusExtraBold] px-5">
+              <View className={` items-center mt-10 `}>
+                <View className={``}>
+                  <Text
+                    className={`text-white text-5xl font-extrabold font-[InterRegular] leading-10  w-80 `}
+                  >
                     {item.title}
                   </Text>
-                  <View>
-                    <Text className="w-96 p-3 text-xs text-zinc-500 font-[Plusregular]">
-                      {item.text}
-                    </Text>
-                  </View>
+                  <Text className=" w-80 text-xs leading-4 text-white mb-5">
+                    {item.text}
+                  </Text>
+                  <Image
+                    source={item.img}
+                    style={{
+                      width,
+                      height: 275,
+                      resizeMode: "contain",
+                      marginTop: 20,
+                      // borderRadius: 10,
+                      // borderTopRightRadius: 5,
+                    }}
+                  />
                 </View>
-              </>
+              </View>
             )}
           />
-          <Footer />
-        </ImageBackground>
-      </View>
+        </View>
+        <Footer />
+      </ImageBackground>
     </View>
   );
 };

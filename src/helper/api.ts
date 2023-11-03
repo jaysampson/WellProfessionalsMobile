@@ -52,7 +52,15 @@ export const getAllCourses = async () => {
 export const createPaymentIntent = async (data: any) => {
   // console.log(data, "amountamount");
   const res = await axiosInstance.post("/stripe/intent", data);
-  console.log(res.data, "4444444444444");
+  console.log(res.data, "paymentIntent");
+
+  return res.data;
+};
+
+export const createOrder = async (data: any) => {
+  console.log(data, "order67");
+  const res = await axiosInstance.post("/order/create-order", data);
+  console.log(res.data, "orderRes");
 
   return res.data;
 };

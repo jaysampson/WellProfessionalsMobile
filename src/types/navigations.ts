@@ -20,6 +20,7 @@ export type HomeStackParamList = {
   ListCategories: undefined;
   SearchScreen: undefined;
   MyCoursesScreen: { item: object };
+  MylessonsScreen: undefined;
 };
 
 export interface RootStackParamList extends HomeStackParamList, AuthStackParamList {}

@@ -56,9 +56,9 @@ const CustomInput = ({
   };
 
   return (
-    <View className="py-3">
+    <View className="py-1">
       {label && (
-        <Text className="text-[#2C3131] text-sm  font-[Plusregular]">
+        <Text className="text-[#2C3131] text-sm font-normal leading-6 font-[Plusregular]">
           {label}
         </Text>
       )}

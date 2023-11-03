@@ -51,7 +51,7 @@ const Details = ({ item }) => {
       <View>
         <Text className="font-[PlusBold] text-[18px] mb-4">About Course</Text>
         <View>
-          <Text className="text-[#191D23] font-[Plusregular] font-[400px] text-[14px] leading-normal">
+          <Text className="text-[#191d23] opacity-70 font-[Plusregular] font-normal text-sm leading-normal">
             {item?.description}
           </Text>
           <TouchableOpacity>
@@ -62,14 +62,14 @@ const Details = ({ item }) => {
         </View>
       </View>
       <View>
-        <Text className="font-[Plusregular] font-[400px] text-[14px] leading-[16px]">
+        <Text className="font-[Plusregular] text-[#545454] font-normal text-sm leading-4 mt-2">
           WHAT’S INCLUDED:{" "}
         </Text>
         {item.benefits.map((b) => (
           <View className="flex-row mt-2 items-center">
             {/* {item.icon} */}
 
-            <Text className="font-[Plusregular] font-[600px] text-[13px] leading-[20px]">
+            <Text className="font-[Plusregular] text-[#000] font-semibold text-xs leading-tight">
               {b.title}
             </Text>
           </View>

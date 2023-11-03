@@ -5,7 +5,6 @@ import { zustandStorage } from "../mmkvStore";
 
 // import { IUser } from '../api/types';
 
-
 type Store = {
   authUser: object | null;
   requestLoading: boolean;
@@ -13,37 +12,33 @@ type Store = {
   setRequestIsLogged: (isLoggedIn: boolean) => void;
 };
 
-
-const authStore =(set)=> ({
+const authStore = (set) => ({
   authUser: null,
-      requestLoggedIn: false,
+  requestLoggedIn: false,
 
-      setAuthUser:(user: object)=>{
-        set((state)=>({
-          ...state, authUser:user
-        }))
-      },
+  setAuthUser: (user: object) => {
+    set((state) => ({
+      ...state,
+      authUser: user,
+    }));
+  },
 
-      setRequestIsLogged: (isLoggedIn: boolean) =>{
-        set((state)=>({
-          ...state, requestLoggedIn:isLoggedIn
-        }))
-      },
-
-})
+  setRequestIsLogged: (isLoggedIn: boolean) => {
+    set((state) => ({
+      ...state,
+      requestLoggedIn: isLoggedIn,
+    }));
+  },
+});
 
 export const useAuthStore = create(
-  persist(
-    authStore, {
-      name: "user-storage", // unique name
-      storage: createJSONStorage(() => zustandStorage), // Add this here!
-    }
-  )
-)
+  persist(authStore, {
+    name: "user-storage", // unique name
+    storage: createJSONStorage(() => zustandStorage), // Add this here!
+  })
+);
 
-
-export default useAuthStore
-
+export default useAuthStore;
 
 // const useAuthStore = create(
 //   persist(
@@ -63,7 +58,5 @@ export default useAuthStore
 //     }
 //   )
 // );
-
-
 
 // export default useAuthStore;

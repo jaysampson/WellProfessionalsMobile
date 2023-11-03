@@ -2,7 +2,7 @@ import { View, Text, ScrollView, Alert } from "react-native";
 import React from "react";
 import CartComp from "../../../components/mainComponents/CartComp";
 import { useMutation, useQuery } from "react-query";
-import { createPaymentIntent, getAllCourses } from "../../../helper/api";
+import { createOrder, createPaymentIntent, getAllCourses } from "../../../helper/api";
 import { useStripe } from "@stripe/stripe-react-native";
 import useAuthStore from "../../../stores";
 import useCourseCartStore from "../../../stores/cartStores";
@@ -25,13 +25,42 @@ const CartScreen = () => {
     );
 
   // console.log( JSON.stringify(coursesItem), "authUser");
+  const course_Id = coursesItem.map((c:any)=>c._id);
+  console.log(course_Id, "course_Id");
 
   const handleRemoveFromCart = (item:object) => {
     removeFromCart(item);
     getTotalAmount();
   };
 
-  const { mutate, data } = useMutation(["payment"], {
+    const createOrderData = useMutation({
+      mutationKey:['createOrder'],
+      enabled: true,
+      mutationFn: () =>
+        createOrder({
+          userId: user_Id,
+              courseId: "650fed2054c8a1d056827615",
+              payment_info: data?.paymentIntent,
+        }),
+      onSuccess: (data) => {
+        console.log(data, "success");
+        // if (data) {
+        //   createOrder({
+        //     userId: user_Id,
+        //     courseId: "650fed2054c8a1d056827615",
+        //     payment_info: data?.paymentIntent,
+        //   });
+        // }
+      },
+      onError: (error) => {
+        console.log(error, "errorr");
+      },
+    });
+
+    console.log(createOrderData, "createOrderData");
+
+  const { mutate, data } = useMutation({
+    mutationKey: ["payment"],
     mutationFn: createPaymentIntent,
     onSuccess: (data) => {
       console.log(data, "success");
@@ -41,14 +70,14 @@ const CartScreen = () => {
     },
   });
 
-  console.log(data, "intent");
+  // console.log(data, "intent");
 
   const onCheckout = async () => {
     // 1. Create a payment intent
     mutate({
       amount: totalAmount,
-      cart: coursesItem,
-      userId: user_Id,
+      // cart: coursesItem,
+      // userId: user_Id,
     });
 
     // 2. Initialize the Payment sheet

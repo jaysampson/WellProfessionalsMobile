@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sunkanmi.wellProfessionalMobile"
     },
     "android": {
       "adaptiveIcon": {
@@ -38,7 +39,7 @@
     "updates": {
       "url": "https://u.expo.dev/5215fd3c-e5e4-4939-ba4f-afc3f7b20f91"
     },
-    "plugins":[
+    "plugins": [
       [
         "expo-av",
         {

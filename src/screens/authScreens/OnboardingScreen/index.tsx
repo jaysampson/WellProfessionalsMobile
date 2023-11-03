@@ -8,8 +8,8 @@ const OnboardingScreen = () => {
   const Slider: TypeSlider[] = [
     {
       id: "1",
-      img: require("../../../assets/images/onboard_2.png"),
-      title: "Lorem ipsum dolor amet, consectetur",
+      img: require("../../../assets/images/onboard_3.png"),
+      title: "Lorem ipsum dolor sit amet.",
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod",
     },
     {
