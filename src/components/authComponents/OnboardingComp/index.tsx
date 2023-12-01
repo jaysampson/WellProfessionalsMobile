@@ -12,6 +12,8 @@ import {
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { TypeSlider } from "../../../types/authTypes";
+import Footer from "./Footer";
+import SliderRenderItem from "./SliderRenderItem";
 
 const { width, height } = Dimensions.get("window");
 
@@ -38,65 +40,20 @@ const OnboardinComp: React.FC<{ slider: TypeSlider[] }> = ({ slider }) => {
     // console.log(ref.current, "scrollToOffset");
   };
 
-  const Footer = () => {
-    return (
-      <View className="flex-row items-center justify-between mb-10">
-        <View className=" justify-between px-8">
-          <View className="flex-row justify-center mt-1">
-            {slider.map((_, index) => (
-              <View
-                key={index}
-                className={`h-1 w-1 mx-1 rounded-md bg-primary-100 ${
-                  currentSlideIndex == index && "bg-primary-100 w-5"
-                }`}
-              />
-            ))}
-          </View>
-        </View>
-        <View className="">
-          {currentSlideIndex == slider.length - 1 ? (
-            <TouchableOpacity
-              className="w-40 h-12 bg-primary-100 items-center justify-center rounded-md  mr-10"
-              onPress={() => {
-                navigation.navigate("Register");
-              }}
-            >
-              <Text className="text-white font-[PlusMedium] font-thin">
-                Get Started
-              </Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              className="mr-10"
-              onPress={() => {
-                onSkip();
-              }}
-            >
-              <Text className="text-orange-20 font-[PlusMedium] font-thin">
-                Skip
-              </Text>
-            </TouchableOpacity>
-          )}
-        </View>
-      </View>
-    );
-  };
-
   return (
-    <View className="flex-1 bg-dark-blue">
+    <View className="flex-1 bg-dark-blue pt-20">
       <View>
         <ImageBackground
           source={require("../../../assets/images/bg_img.png")}
           style={{ width: "100%", height: "100%" }}
         >
-          <View className="px-3">
+          <View className=" w-72 h-10 self-center mb-16 ">
             <Image
               source={require("../../../assets/images/logo_1.png")}
               style={{
-                width: 297,
-                height: 40,
-                marginHorizontal: 39,
-                marginVertical: 50,
+                width: "100%",
+                height: "100%",
+               
               }}
             />
           </View>
@@ -106,29 +63,16 @@ const OnboardinComp: React.FC<{ slider: TypeSlider[] }> = ({ slider }) => {
             horizontal
             pagingEnabled
             onMomentumScrollEnd={updateCurrentSlideIndex}
-            contentContainerStyle={{ height: height * 75 }}
+            // contentContainerStyle={{ height: height * 75 }}
             showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <>
-                <View className="">
-                  <Image
-                    source={item.img}
-                    resizeMode="contain"
-                    style={{ height: 350, width }}
-                  />
-                  <Text className=" w-96 text-white text-5xl  font-[PlusExtraBold] px-5">
-                    {item.title}
-                  </Text>
-                  <View>
-                    <Text className="w-96 p-3 text-xs text-zinc-500 font-[Plusregular]">
-                      {item.text}
-                    </Text>
-                  </View>
-                </View>
-              </>
-            )}
+            renderItem={({ item }) => <SliderRenderItem item={item} />}
           />
-          <Footer />
+          <Footer
+            slider={slider}
+            currentSlideIndex={currentSlideIndex}
+            setCurrentSlideIndex={setCurrentSlideIndex}
+            onSkip={onSkip}
+          />
         </ImageBackground>
       </View>
     </View>
