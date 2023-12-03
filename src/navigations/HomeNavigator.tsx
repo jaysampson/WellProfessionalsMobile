@@ -1,13 +1,14 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { CartIcon, FeaturedIcon, HomeIcon, ProfileIcon, SearchIcon } from '../helper/Icon';
+import { CartActiveIcon, CartIcon, FeaturedIcon, HomeActiveIcon, HomeIcon, ProfileActiveIcon, ProfileIcon, SearchIcon } from '../helper/Icon';
 import HomeStackNavigators from './rootStackNavigators/HomeStackNavigators';
 import { HomeStackParamList } from '../types/navigations';
 import ProfileStackNavigators from './rootStackNavigators/ProfileStackNavigators';
 import CartScreen from '../screens/mainScreens/CartScreen';
 import SearchScreen from '../screens/mainScreens/SearchScreen';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import Icon from '../components/customComponents/CustomIcon';
 
 
 const HomeStack = ()=>{}
@@ -44,33 +45,37 @@ const HomeNavigator = () => {
         initialRouteName="HomeScreen"
         screenOptions={({ route }) => ({
           header: () => null,
-          // tabBarIcon: ({ focused, size, color }) => {
-          //    let iconName;
-          //    if (route.name === "Home") {
-          //      iconName = <HomeIcon />;
-          //      size = focused ? 20 : 18;
-          //      color = focused ? "#AF5E41" : "#0000";
-          //    } else if (route.name === "Featured") {
-          //      iconName = <FeaturedIcon />;
-          //      size = focused ? 20 : 18;
-          //      color = focused ? "#AF5E41" : "#0000";
-          //    } else if (route.name === "Search") {
-          //      iconName = <SearchIcon />;
-          //      size = focused ? 20 : 18;
-          //      color = focused ? "#AF5E41" : "#0000";
-          //    } else if (route.name === "Cart") {
-          //      iconName = <CartIcon />;
-          //      size = focused ? 20 : 18;
-          //      color = focused ? "#AF5E41" : "#0000";
-          //    } else if (route.name === "User") {
-          //      iconName = <ProfileIcon />;
-          //      size = focused ? 20 : 18;
-          //      color = focused ? "#AF5E41" : "#0000";
-          //    }
-          //     return (
-          //       <Icon type={type} name={iconName} size={size} color={color} />
-          //     );
-          // },
+          tabBarIcon: ({ focused, size, color }) => {
+            let iconName;
+            let type;
+            if (route.name === "HomeStackNavigators") {
+              iconName = focused ? <HomeActiveIcon /> : <HomeIcon />;
+              size = focused ? 20 : 18;
+              color = focused ? "#AF5E41" : "#0000";
+              type = focused ? "HomeActiveIcon" : "HomeIcon";
+            } else if (route.name === "Featured") {
+              iconName = <FeaturedIcon />;
+              size = focused ? 20 : 18;
+              color = focused ? "#AF5E41" : "#0000";
+            } else if (route.name === "SearchScreen") {
+              iconName = <SearchIcon />;
+              size = focused ? 20 : 18;
+              color = focused ? "#AF5E41" : "#0000";
+            } else if (route.name === "CartScreen") {
+              iconName = focused? <CartActiveIcon />: <CartIcon />;
+              size = focused ? 20 : 18;
+              color = focused ? "#AF5E41" : "#0000";
+               type = focused ? "CartActiveIcon" : "CartIcon";
+            } else if (route.name === "ProfileStackNavigators") {
+              iconName = focused ? <ProfileActiveIcon /> : <ProfileIcon />;
+              size = focused ? 20 : 18;
+              color = focused ? "#AF5E41" : "#0000";
+              type = focused ? "ProfileActiveIcon" : "ProfileIcon";
+            }
+            return (
+              <Icon type={type} name={iconName} size={size} color={color} />
+            );
+          },
           tabBarActiveTintColor: "#AF5E41",
           // tabBarInactiveTintColor: "gray",
           tabBarActiveBackgroundColor: "rgba(175, 94, 65, 0.2)",
@@ -78,58 +83,40 @@ const HomeNavigator = () => {
         })}
       >
         <Tab.Screen
-          name="Home"
+          name="HomeStackNavigators"
           component={HomeStackNavigators}
-          // options={{
-          //   tabBarIcon: ({ color, size, focused }) => (
-          //     <HomeIcon size={size} color={color} />,
-          //     // tabBarShowLabel: false,
-          //     tabBarStyle: { display: getTabBarVisibility(route) },
-          //   ),
-          // }}
           options={({ route }) => ({
             tabBarLabel: "Home",
             tabBarStyle: { display: getTabBarVisibility(route) },
-             tabBarIcon: ({ color, size, focused }) => (
-              <HomeIcon size={size} color={color} />
-             )
           })}
         />
         <Tab.Screen
           name="Featured"
           component={DummyScreen}
           options={{
-            tabBarIcon: ({ focused, color, size }) => (
-              <FeaturedIcon size={size} color={focused ? "#AF5E41" : color} />
-            ),
+            tabBarLabel: "Featured",
           }}
         />
         <Tab.Screen
-          name="Search"
+          name="SearchScreen"
           component={SearchScreen}
           options={{
-            tabBarIcon: ({ color, size }) => (
-              <SearchIcon size={size} color={color} />
-            ),
+            tabBarLabel: "Search",
           }}
         />
         <Tab.Screen
-          name="Cart"
+          name="CartScreen"
           component={CartScreen}
           options={{
-            tabBarIcon: ({ color, size }) => (
-              <CartIcon size={size} color={color} />
-            ),
+            tabBarLabel: "Cart",
           }}
         />
         <Tab.Screen
-          name="User"
+          name="ProfileStackNavigators"
           component={ProfileStackNavigators}
           options={{
-            tabBarStyle: { display: "none" },
-            tabBarIcon: ({ color, size }) => (
-              <ProfileIcon size={size} color={color} />
-            ),
+            tabBarLabel: "Profile",
+            // tabBarStyle: { display: getTabBarVisibility(route) },
           }}
         />
       </Tab.Navigator>

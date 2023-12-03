@@ -42,10 +42,30 @@ export const getUsers = async () => {
   return res.data;
 };
 
+//GET A USERS
+export const getAUser = async (userId:string) => {
+  const res = await axiosInstance.get(`/user/${userId}`);
+  return res.data;
+};
+
 //COURSE API
 export const getAllCourses = async () => {
   const res = await axiosInstance.get("/course");
   return res.data;
+};
+//COURSE CATEGORY API
+export const getAllCoursesCategory = async () => {
+  const res = await axiosInstance.get("/course/category/all-categories");
+  // console.log(res.data, "rssss")
+  return res.data;
+};
+
+//COURSE BY CATEGORY  API
+export const coursesByCategory = async (title: string) => {
+  // console.log(title, "title");
+  const res = await axiosInstance.get(`/course?category=${title}`);
+  // console.log(res.data.getCourse, "rssss");
+  return res.data.getCourse;
 };
 
 //Stripe API

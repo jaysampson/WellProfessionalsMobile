@@ -12,22 +12,21 @@ import {
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { TypeSlider } from "../../../types/authTypes";
+import Footer from "./Footer";
+import SliderRenderItem from "./SliderRenderItem";
 
 const { width, height } = Dimensions.get("window");
-
-
 
 const OnboardinComp: React.FC<{ slider: TypeSlider[] }> = ({ slider }) => {
   const navigation = useNavigation();
   const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);
 
-  const ref = React.useRef(null);
+  const ref = React.useRef<number | any>(null);
 
   const updateCurrentSlideIndex = (
     e: NativeSyntheticEvent<NativeScrollEvent>
   ) => {
     const contentOffsetX = e.nativeEvent.contentOffset.x;
-    // console.log(contentOffsetX, "contentOffsetX");
     const currentIndex = Math.round(contentOffsetX / width);
     setCurrentSlideIndex(currentIndex);
     // console.log(currentIndex, "currentIndex");
@@ -37,112 +36,44 @@ const OnboardinComp: React.FC<{ slider: TypeSlider[] }> = ({ slider }) => {
     const offSet = lastSlideIndex * width;
     ref?.current?.scrollToOffset({ offSet });
     setCurrentSlideIndex(lastSlideIndex);
-   
-  };
-
-  const Footer = () => {
-    return (
-      <View className="flex-row items-center justify-between mb-10">
-        <View className=" justify-between px-8">
-          <View className="flex-row justify-center mt-1">
-            {slider.map((_, index) => (
-              <View
-                key={index}
-                className={`h-1 w-1 mx-1 rounded-md bg-primary-100 ${
-                  currentSlideIndex == index && "bg-primary-100 w-5"
-                }`}
-              />
-            ))}
-          </View>
-        </View>
-        <View className="">
-          {currentSlideIndex == slider.length - 1 ? (
-            <TouchableOpacity
-              className=" items-center justify-center rounded-md bg-[#AF5E41] px-[38px] py-[16px]  mr-10"
-              onPress={() => {
-                navigation.navigate("Register");
-              }}
-            >
-              <Text className="text-white font-[PlusMedium] font-thin">
-                Get Started
-              </Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              className="mr-10"
-              onPress={() => {
-                onSkip();
-              }}
-            >
-              <Text className="text-orange-20 font-[PlusMedium] font-thin">
-                Skip
-              </Text>
-            </TouchableOpacity>
-          )}
-        </View>
-      </View>
-    );
+    // console.log(lastSlideIndex, "lastSlideIndex");
+    // console.log(ref.current, "scrollToOffset");
   };
 
   return (
-    <View className="flex-1 bg-dark-blue">
-      <ImageBackground
-        source={require("../../../assets/images/bg_img.png")}
-        className="w-full h-full"
-        // style={{width:"100%", height: "100%"}}
-      >
-        <View className=" flex-row items-center mx-auto">
-          <View className=" w-[54px] h-[40px] ">
+    <View className="flex-1 bg-dark-blue pt-20">
+      <View>
+        <ImageBackground
+          source={require("../../../assets/images/bg_img.png")}
+          style={{ width: "100%", height: "100%" }}
+        >
+          <View className=" w-72 h-10 self-center mb-16 ">
             <Image
-              source={require("../../../assets/images/logo.png")}
+              source={require("../../../assets/images/logo_1.png")}
               style={{
                 width: "100%",
                 height: "100%",
               }}
             />
           </View>
-          <Text className="text-[16px] font-[700] leading-[30px] font-[Plusregular] tracking-[3px] uppercase text-[#AFBCCB] my-10">
-            Well Professionals
-          </Text>
-        </View>
-        <View className="">
           <FlatList
-          ref={ref}
+            ref={ref}
             data={slider}
             horizontal
             pagingEnabled
             onMomentumScrollEnd={updateCurrentSlideIndex}
+            // contentContainerStyle={{ height: height * 75 }}
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ height: height * 0.75 }}
-            renderItem={({ item }) => (
-              <View className={` items-center mt-10 `}>
-                <View className={``}>
-                  <Text
-                    className={`text-white text-5xl font-extrabold font-[InterRegular] leading-10  w-80 `}
-                  >
-                    {item.title}
-                  </Text>
-                  <Text className=" w-80 text-xs leading-4 text-white mb-5">
-                    {item.text}
-                  </Text>
-                  <Image
-                    source={item.img}
-                    style={{
-                      width,
-                      height: 275,
-                      resizeMode: "contain",
-                      marginTop: 20,
-                      // borderRadius: 10,
-                      // borderTopRightRadius: 5,
-                    }}
-                  />
-                </View>
-              </View>
-            )}
+            renderItem={({ item }) => <SliderRenderItem item={item} />}
           />
-        </View>
-        <Footer />
-      </ImageBackground>
+          <Footer
+            slider={slider}
+            currentSlideIndex={currentSlideIndex}
+            setCurrentSlideIndex={setCurrentSlideIndex}
+            onSkip={onSkip}
+          />
+        </ImageBackground>
+      </View>
     </View>
   );
 };

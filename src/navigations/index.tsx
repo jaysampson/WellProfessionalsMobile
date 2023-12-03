@@ -13,6 +13,7 @@ import useAuthStore from "../stores";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getMeUser } from "../helper/api";
 import { storage } from "../mmkvStore";
+import { navigationRef } from "./RootNavigator";
 
 const AppNavigation = () => {
   const { setRequestIsLogged,requestLoggedIn, setAuthUser, authUser } = useAuthStore(
@@ -25,18 +26,16 @@ const AppNavigation = () => {
     })
   );
 
-  const { isLoading, isError, error, data } = useQuery(["getme"], getMeUser,{
-    onSuccess(data) {
-         setRequestIsLogged(true);
-         setAuthUser(data);
-    },
-  });
+  // const { isLoading, isError, error, data } = useQuery(["getme"], getMeUser,{
+  //   onSuccess(data) {
+  //        setRequestIsLogged(true);
+  //        setAuthUser(data);
+  //   },
+  // });
   const [isAuthenticated, setIsAuthenticated] = useState(requestLoggedIn);
   const [authLoad, setAuthLoad] = useState(false);
 
-  console.log(requestLoggedIn,authUser, "authUser")
-  // console.log(isLoading, isError, error, data, "555555555555")
-
+// console.log(authUser, "authUserNav");
   const getUser = async () => {
     try {
       // const user = await AsyncStorage.getItem("user");
@@ -44,7 +43,7 @@ const AppNavigation = () => {
       const user = storage.getString("user");
       const token = storage.getString("token");
 
-      // console.log(user, "authStorage");
+      console.log(user, "authStorage");
 
       if (user || token) {
         setAuthLoad(true);
@@ -63,7 +62,7 @@ const AppNavigation = () => {
   }, [requestLoggedIn]);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       {isAuthenticated ? <HomeNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );

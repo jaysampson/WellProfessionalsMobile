@@ -154,8 +154,8 @@ const CoursePrevieComp = ({
       </View>
       <View>
         <View className="h-[0.5] bg-black" />
-        {courseData ? (
-          <View className=" py-2 bg-white justify-center items-center ">
+        {courseData  ? (
+           <View className=" py-2 bg-white justify-center items-center ">
             <TouchableOpacity
               className=" h-[44] w-4/5 bg-[#1E1D2F] justify-center items-center rounded"
               onPress={() => {
@@ -166,8 +166,8 @@ const CoursePrevieComp = ({
                 Go to Course
               </Text>
             </TouchableOpacity>
-          </View>
-        ) : (
+          </View> 
+        ) : ( 
           <View className=" py-2 bg-white justify-center items-center ">
             <TouchableOpacity
               className=" h-[44] w-4/5 bg-[#1E1D2F] justify-center items-center rounded"
@@ -180,7 +180,7 @@ const CoursePrevieComp = ({
               </Text>
             </TouchableOpacity>
           </View>
-        )}
+         )} 
       </View>
      
     </>

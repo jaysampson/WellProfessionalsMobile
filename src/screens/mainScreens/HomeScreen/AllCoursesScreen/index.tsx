@@ -3,7 +3,7 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import AllCoursesComp from "../../../../components/mainComponents/HomeScreenComp/AllCoursesComp";
 import { useQuery } from "react-query";
-import { getAllCourses } from "../../../../helper/api";
+import { getAUser, getAllCourses, getUsers } from "../../../../helper/api";
 import useAuthStore from "../../../../stores";
 import useCourseCartStore from "../../../../stores/cartStores";
 import Toast from "react-native-toast-message";
@@ -12,10 +12,25 @@ import { useNavigation } from "@react-navigation/native";
 const AllCoursesScreen = () => {
   const navigation = useNavigation()
   const authUser = useAuthStore((state) => state.authUser);
+
+  // USEQUERY
   const { data, error, status, isLoading, isError } = useQuery(
     ["course"],
     getAllCourses
   );
+
+  const getAllUsers = useQuery(["getAllUsers"], getUsers);
+
+  const {
+    data: getAUserInfo,
+    error: getAUserError,
+    isLoading: getAUserLoading,
+  } = useQuery({
+    queryKey: ["UserId"],
+    queryFn: () => getAUser(authUser?.others?._id),
+  });
+
+
 
   const { addToCartItem, getTotalAmount, coursesItem } = useCourseCartStore(
     (state) => ({
@@ -31,7 +46,7 @@ const AllCoursesScreen = () => {
     if(courseIsExist){
       Toast.show({
         type: "info",
-        text1: `${courseIsExist.name} is Already added!`
+        text1: `Course is Already added!`,
       });
     } else{
       addToCartItem(item);
@@ -46,8 +61,7 @@ const AllCoursesScreen = () => {
   };
 
 
-  // const courseData = authUser.others.courses.map((d) => d._id);
-  // console.log(authUser, "courseData");
+  
 
   const handleOnClick=(item:object)=>{
     navigation.navigate("CoursePreviewScreen", {item});
@@ -61,8 +75,9 @@ const AllCoursesScreen = () => {
       isLoading={isLoading}
       isError={isError}
       handlAddToCart={handlAddToCart}
-      authUser={authUser}
+      authUser={getAUserInfo}
       handleOnClick={handleOnClick}
+      getAllUsers={getAllUsers}
     />
   );
 };

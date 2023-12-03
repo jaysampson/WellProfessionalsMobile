@@ -2,30 +2,43 @@ import { View, Text, ScrollView } from "react-native";
 import React from "react";
 // import HomeScreenComp from "../../../components/mainComponents/HomeScreenComp";
 import { useQuery } from "react-query";
-import { getAllCourses, getMeUser } from "../../../helper/api";
+import { getAUser, getAllCourses, getMeUser } from "../../../helper/api";
 import useAuthStore from "../../../stores";
 import HomeScreenComp from "../../../components/mainComponents/HomeScreenComp";
 
 const HomeScreen = () => {
-  //CALL USEQUERY
-  const { isLoading, error, data, isError } = useQuery(["getme"], getMeUser);
-  const getCourses = useQuery(["course"], getAllCourses);
-
+  
   const { setRequestIsLogged, requestLoggedIn, setAuthUser, authUser } =
     useAuthStore((state) => ({
       setRequestIsLogged: state.setRequestIsLogged,
       requestLoggedIn: state.requestLoggedIn,
       setAuthUser: state.setAuthUser,
-      authUser: state.authUser
-
+      authUser: state.authUser,
     }));
 
- 
+  // console.log(authUser, "authUser");
+  //CALL USEQUERY
+  const { isLoading, error, data, isError } = useQuery({
+    queryKey: ["getme"],
+    queryFn: getMeUser,
+  });
+
+  const getCourses = useQuery({
+    queryKey: ["course"],
+    queryFn: getAllCourses,
+  });
+
+  // const { isLoading, error, data, isError } = useQuery(
+  //   ["getme", authUser?.others?._id],
+  //   getAUser
+  // );
+
+  // console.log(data,error, "data")
+
   //GET TRENDING COURSES
   const getTopTrendingCourses = getCourses?.data?.getCourse.filter(
-    (d:any) => d.purchased > 0
+    (d: any) => d.purchased > 0
   );
-
 
   const homeSwiper = [
     {
@@ -47,8 +60,6 @@ const HomeScreen = () => {
         "We are dedicated to providing comprehensive online courses in the field of oil and gas",
     },
   ];
-
- 
 
   const ratedCourseData = [
     {

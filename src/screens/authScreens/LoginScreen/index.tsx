@@ -50,6 +50,8 @@ const LoginScreen = () => {
   );
   console.log({ data, error, isError, isLoading, isSuccess }, "mutate");
 
+  console.log(authUser, "authUserlogin");
+
   const onSubmit = () => {
     console.log(form);
     mutate(form);
