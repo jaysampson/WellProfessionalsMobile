@@ -8,15 +8,8 @@ import HomeScreenComp from "../../../components/mainComponents/HomeScreenComp";
 
 const HomeScreen = () => {
   
-  const { setRequestIsLogged, requestLoggedIn, setAuthUser, authUser } =
-    useAuthStore((state) => ({
-      setRequestIsLogged: state.setRequestIsLogged,
-      requestLoggedIn: state.requestLoggedIn,
-      setAuthUser: state.setAuthUser,
-      authUser: state.authUser,
-    }));
 
-  // console.log(authUser, "authUser");
+
   //CALL USEQUERY
   const { isLoading, error, data, isError } = useQuery({
     queryKey: ["getme"],
@@ -28,12 +21,7 @@ const HomeScreen = () => {
     queryFn: getAllCourses,
   });
 
-  // const { isLoading, error, data, isError } = useQuery(
-  //   ["getme", authUser?.others?._id],
-  //   getAUser
-  // );
 
-  // console.log(data,error, "data")
 
   //GET TRENDING COURSES
   const getTopTrendingCourses = getCourses?.data?.getCourse.filter(
@@ -86,8 +74,7 @@ const HomeScreen = () => {
       error={error}
       data={data}
       getCourses={getCourses}
-      authUser={authUser}
-      requestLoggedIn={requestLoggedIn}
+ 
       getTopTrendingCourses={getTopTrendingCourses}
       isError={isError}
     />

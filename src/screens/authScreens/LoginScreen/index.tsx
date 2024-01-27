@@ -4,7 +4,7 @@ import LoginComp from "../../../components/authComponents/LoginComp";
 import { useNavigation } from "@react-navigation/native";
 import { useMutation } from "react-query";
 import Toast from "react-native-toast-message";
-import { loginUser } from "../../../helper/api";
+import { User, loginUser } from "../../../helper/api";
 import useAuthStore from "../../../stores";
  
 const LoginScreen = () => {
@@ -29,7 +29,7 @@ const LoginScreen = () => {
     ["login"],
     {
       mutationFn: loginUser,
-      onSuccess: (data) => {
+      onSuccess: (data:any) => {
         Toast.show({
           type: "success",
           text1: data.data.name,
@@ -52,8 +52,8 @@ const LoginScreen = () => {
 
   console.log(authUser, "authUserlogin");
 
-  const onSubmit = () => {
-    console.log(form);
+  const onSubmit = (form: User) => {
+    // console.log(form, "9990");
     mutate(form);
   };
 

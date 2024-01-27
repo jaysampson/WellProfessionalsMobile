@@ -1,8 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { storage } from "../mmkvStore";
-// import { navigate } from "../navigations/RootNavigator";
-import * as RootNavigation from "../navigations/RootNavigator";
+import { navigate } from "../navigations/RootNavigator";
+// import * as RootNavigation from "../navigations/RootNavigator";
 
 
 const token =
@@ -19,8 +19,8 @@ const axiosInstance = axios.create({
 });
 axiosInstance.interceptors.request.use(
   async (config) => {
-    // const token = await AsyncStorage.getItem("token");
-    const token = storage.getString("token");
+    const token = await AsyncStorage.getItem("token");
+    // const token = storage.getString("token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
       // config.headers.Authorization = `Bearer token`;
@@ -37,7 +37,8 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.response.status === 401) {
-      RootNavigation.navigate("HomeStackNavigators",{screen:"LogoutScreen", tokenExpired: true });
+      navigate("HomeStackNavigators",{screen:"LogoutScreen", tokenExpired: true });
+      //  navigate("LogoutScreen", { tokenExpired: true });
     }
     return Promise.reject(error);
   }

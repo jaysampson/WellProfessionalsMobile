@@ -25,24 +25,17 @@ const HomeScreenComp = ({
   error,
   data,
   getCourses,
-  authUser,
-  requestLoggedIn,
   getTopTrendingCourses,
   isError,
 }) => {
-  console.log(authUser?.others?.name, "name");
   const navigation = useNavigation();
   return (
     <>
-      <Spinner
-        visible={isLoading}
-        // textContent={"Loading..."}
-        // textStyle={styles.spinnerTextStyle}
-      />
+      <Spinner visible={isLoading} />
       <View className=" flex-1 bg-white">
         <View className="py-10 px-6  bg-[#1E1D2F]">
           <View className="flex-row mt-5 justify-between">
-            {isLoading && requestLoggedIn && (
+            {isLoading && (
               <Text className="text-[18px] text-white font-[700] leading-[32px] font-[PlusSemiBold]">
                 Loading...
               </Text>
@@ -54,14 +47,9 @@ const HomeScreenComp = ({
             )}
             {!isLoading && !error && (
               <Text className="text-[18px] text-white font-[700] leading-[32px] font-[Plusregular]">
-                Hello {data?.others?.name || authUser?.others?.name}
+                Hello {data?.others?.name}
               </Text>
             )}
-            {/* {requestLoggedIn &&  (
-            <Text className="text-[18px] text-white font-[700] leading-[32px] font-[Plusregular]">
-              Hello { authUser?.others?.name}
-            </Text>
-          )} */}
 
             <TouchableOpacity className="" onPress={() => {}}>
               <Ionicons name="notifications-outline" size={24} color="#ffff" />
@@ -79,12 +67,15 @@ const HomeScreenComp = ({
                 Categories
               </Text>
             </TouchableOpacity>
-            <View className="flex-row flex-1 px-3  h-[54] items-center bg-white justify-between ">
-              <TextInput placeholder="Search something" className="  flex-1 " />
-              <TouchableOpacity>
-                <Ionicons name="search" size={24} color="#A0ABBB" />
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              className="flex-row flex-1 px-3  h-[54] items-center bg-white justify-between"
+              onPress={() => {
+                navigation.navigate("SearchScreen", { screen: "SearchScreen" });
+              }}
+            >
+              <Text>Search something</Text>
+              <Ionicons name="search" size={24} color="#A0ABBB" />
+            </TouchableOpacity>
           </View>
         </View>
         <ScrollView>
@@ -145,6 +136,7 @@ const HomeScreenComp = ({
                             width: "100%",
                             height: "100%",
                             borderRadius: 10,
+                            resizeMode: "contain",
                           }}
                         />
                       </View>
@@ -191,6 +183,7 @@ const HomeScreenComp = ({
                             width: "100%",
                             height: "100%",
                             borderRadius: 10,
+                            resizeMode: "contain",
                           }}
                         />
                       </View>

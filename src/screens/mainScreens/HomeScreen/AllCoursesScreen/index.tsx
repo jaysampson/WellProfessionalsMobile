@@ -10,8 +10,11 @@ import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
 
 const AllCoursesScreen = () => {
-  const navigation = useNavigation()
-  const authUser = useAuthStore((state) => state.authUser);
+  const navigation = useNavigation();
+
+  const { authUser } = useAuthStore((state) => ({
+    authUser: state.authUser,
+  }));
 
   // USEQUERY
   const { data, error, status, isLoading, isError } = useQuery(
@@ -21,53 +24,40 @@ const AllCoursesScreen = () => {
 
   const getAllUsers = useQuery(["getAllUsers"], getUsers);
 
-  const {
-    data: getAUserInfo,
-    error: getAUserError,
-    isLoading: getAUserLoading,
-  } = useQuery({
-    queryKey: ["UserId"],
-    queryFn: () => getAUser(authUser?.others?._id),
+  const { data: getAUserInfo } = useQuery({
+    queryKey: ["UserId", authUser?.data?._id],
+    queryFn: () => getAUser(authUser?.data?._id),
   });
-
-
 
   const { addToCartItem, getTotalAmount, coursesItem } = useCourseCartStore(
     (state) => ({
-      addToCartItem: state.addToCartItem, 
-      getTotalAmount: state.getTotalAmount, 
+      addToCartItem: state.addToCartItem,
+      getTotalAmount: state.getTotalAmount,
       coursesItem: state.coursesItem,
     })
   );
 
-
   const handlAddToCart = (item) => {
-    const courseIsExist = coursesItem?.find((d) => d._id === item._id) 
-    if(courseIsExist){
+    const courseIsExist = coursesItem?.find((d) => d._id === item._id);
+    if (courseIsExist) {
       Toast.show({
         type: "info",
         text1: `Course is Already added!`,
       });
-    } else{
+    } else {
       addToCartItem(item);
       getTotalAmount();
       Toast.show({
         type: "success",
         text1: `${item.name} added to cart`,
-        
       });
     }
-    
   };
 
+  const handleOnClick = (item: object) => {
+    navigation.navigate("CoursePreviewScreen", { item });
+  };
 
-  
-
-  const handleOnClick=(item:object)=>{
-    navigation.navigate("CoursePreviewScreen", {item});
-  }
-
- 
   return (
     <AllCoursesComp
       data={data}

@@ -145,7 +145,7 @@ const CourseCategoriesComp = ({
                       {authUser?.data?.courses.find((d) => d._id === item._id)
                         ? "Go to course"
                         : " Add to cart"}
-                      {/* Add to cart */}
+                      
                     </Text>
                   </TouchableOpacity>
                 </View>

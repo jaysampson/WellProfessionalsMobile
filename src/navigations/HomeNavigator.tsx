@@ -1,43 +1,44 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text } from "react-native";
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { CartActiveIcon, CartIcon, FeaturedIcon, HomeActiveIcon, HomeIcon, ProfileActiveIcon, ProfileIcon, SearchIcon } from '../helper/Icon';
-import HomeStackNavigators from './rootStackNavigators/HomeStackNavigators';
-import { HomeStackParamList } from '../types/navigations';
-import ProfileStackNavigators from './rootStackNavigators/ProfileStackNavigators';
-import CartScreen from '../screens/mainScreens/CartScreen';
-import SearchScreen from '../screens/mainScreens/SearchScreen';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import Icon from '../components/customComponents/CustomIcon';
+import {
+  CartActiveIcon,
+  CartIcon,
+  FeaturedIcon,
+  HomeActiveIcon,
+  HomeIcon,
+  ProfileActiveIcon,
+  ProfileIcon,
+  SearchAciveIcon,
+  SearchIcon,
+} from "../helper/Icon";
+import HomeStackNavigators from "./rootStackNavigators/HomeStackNavigators";
+import { HomeStackParamList } from "../types/navigations";
+import ProfileStackNavigators from "./rootStackNavigators/ProfileStackNavigators";
+import CartScreen from "../screens/mainScreens/CartScreen";
+import SearchScreen from "../screens/mainScreens/SearchScreen";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import Icon from "../components/customComponents/CustomIcon";
 
-
-const HomeStack = ()=>{}
+const HomeStack = () => {};
 const Tab = createBottomTabNavigator<HomeStackParamList>();
 
 function DummyScreen() {
-  return <View className='flex-1 items-center justify-center bg-green-500'>
-    <Text>Am a Dummy Screen</Text>
-  </View>;
+  return (
+    <View className="flex-1 items-center justify-center bg-green-500">
+      <Text>Am a Dummy Screen</Text>
+    </View>
+  );
 }
 
-
 const HomeNavigator = () => {
-
-
-   const getTabBarVisibility = (route) => {
-     const routeName = getFocusedRouteNameFromRoute(route) ?? "Home";
-     if (
-       routeName === "CoursePreviewScreen" 
-      
-     ) {
-       return "none";
-     }
-     return "flex";
-   };
-
-
-
-
+  const getTabBarVisibility = (route) => {
+    const routeName = getFocusedRouteNameFromRoute(route) ?? "Home";
+    if (routeName === "CoursePreviewScreen") {
+      return "none";
+    }
+    return "flex";
+  };
 
   return (
     <>
@@ -58,14 +59,15 @@ const HomeNavigator = () => {
               size = focused ? 20 : 18;
               color = focused ? "#AF5E41" : "#0000";
             } else if (route.name === "SearchScreen") {
-              iconName = <SearchIcon />;
+              iconName = focused ? <SearchAciveIcon /> : <SearchIcon />;
               size = focused ? 20 : 18;
               color = focused ? "#AF5E41" : "#0000";
+              type = focused ? "SearchAciveIcon" : "SearchIcon";
             } else if (route.name === "CartScreen") {
-              iconName = focused? <CartActiveIcon />: <CartIcon />;
+              iconName = focused ? <CartActiveIcon /> : <CartIcon />;
               size = focused ? 20 : 18;
               color = focused ? "#AF5E41" : "#0000";
-               type = focused ? "CartActiveIcon" : "CartIcon";
+              type = focused ? "CartActiveIcon" : "CartIcon";
             } else if (route.name === "ProfileStackNavigators") {
               iconName = focused ? <ProfileActiveIcon /> : <ProfileIcon />;
               size = focused ? 20 : 18;
@@ -90,13 +92,13 @@ const HomeNavigator = () => {
             tabBarStyle: { display: getTabBarVisibility(route) },
           })}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Featured"
           component={DummyScreen}
           options={{
             tabBarLabel: "Featured",
           }}
-        />
+        /> */}
         <Tab.Screen
           name="SearchScreen"
           component={SearchScreen}
@@ -122,6 +124,6 @@ const HomeNavigator = () => {
       </Tab.Navigator>
     </>
   );
-}
+};
 
-export default HomeNavigator
+export default HomeNavigator;

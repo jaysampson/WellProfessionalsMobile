@@ -4,6 +4,7 @@ import CourseCategoriesComp from "../../../../components/mainComponents/HomeScre
 import { useQuery } from "react-query";
 import {
   coursesByCategory,
+  getAUser,
   getAllCoursesCategory,
 } from "../../../../helper/api";
 import useAuthStore from "../../../../stores";
@@ -18,7 +19,6 @@ export type myCoursesCategoryType = {
 const CourseCategories = () => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [categoryTitle, setCategoryTitle] = React.useState("Topstream");
-
   const authUser = useAuthStore((state) => state.authUser);
 
   const { addToCartItem, getTotalAmount, coursesItem } = useCourseCartStore(
@@ -39,7 +39,7 @@ const CourseCategories = () => {
     queryFn: () => coursesByCategory(categoryTitle),
   });
 
-  console.log(data, error, isLoading, "categoryTitle");
+  // console.log(data, error, isLoading, "categoryTitle");
 
 
    const handlAddToCart = (item) => {
@@ -74,6 +74,14 @@ const CourseCategories = () => {
     },
   ];
 
+
+  //USEQUERY
+   const { data: getAUserInfo } = useQuery({
+     queryKey: ["UserId", authUser?.data?._id],
+     queryFn: () => getAUser(authUser?.data?._id),
+   });
+
+
   return (
     <CourseCategoriesComp
       currentIndex={currentIndex}
@@ -82,7 +90,7 @@ const CourseCategories = () => {
       handleCategory={handleCategory}
       data={data}
       isLoading={isLoading}
-      authUser={authUser}
+      authUser={getAUserInfo}
       handlAddToCart={handlAddToCart}
     />
   );

@@ -18,7 +18,7 @@ export type HomeStackParamList = {
   CartScreen: { item: object };
   CourseCategories: undefined;
   ListCategories: undefined;
-  SearchScreen: undefined;
+  SearchScreen: {screen: string};
   MyCoursesScreen: { item: object };
   MylessonsScreen: { item: object };
   LogoutScreen: { tokenExpired: object };

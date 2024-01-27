@@ -21,8 +21,8 @@ const {
   error: getAUSerError,
   isLoading: getAUserLoading,
 } = useQuery({
-  queryKey: ["UserId"],
-  queryFn: () => getAUser(authUser?.others?._id),
+  queryKey: ["UserId", authUser?.data?._id],
+  queryFn: () => getAUser(authUser?.data?._id),
 });
   console.log(getAUserInfo, "getAUserInfo");
 

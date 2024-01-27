@@ -1,6 +1,14 @@
 import React from "react";
-import { CartActiveIcon, CartIcon, HomeActiveIcon, HomeIcon, ProfileActiveIcon, ProfileIcon } from "../../../helper/Icon";
-
+import {
+  CartActiveIcon,
+  CartIcon,
+  HomeActiveIcon,
+  HomeIcon,
+  ProfileActiveIcon,
+  ProfileIcon,
+  SearchAciveIcon,
+  SearchIcon,
+} from "../../../helper/Icon";
 
 const getIconFont = (type: React.ReactNode) => {
   switch (type) {
@@ -12,11 +20,14 @@ const getIconFont = (type: React.ReactNode) => {
       return CartIcon;
     case "CartActiveIcon":
       return CartActiveIcon;
+    case "SearchIcon":
+      return SearchIcon;
+    case "SearchAciveIcon":
+      return SearchAciveIcon;
     case "ProfileIcon":
       return ProfileIcon;
     case "ProfileActiveIcon":
       return ProfileActiveIcon;
-
     default:
       return HomeIcon;
   }

@@ -3,6 +3,7 @@ import React from 'react'
 import useAuthStore from "../../../../stores";
 import { storage } from "../../../../mmkvStore";
 import Toast from "react-native-toast-message";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LogoutScreen = () => {
 
@@ -14,20 +15,31 @@ const LogoutScreen = () => {
          authUser: state.authUser,
        }));
 
-       React.useEffect(()=>{
-           storage.clearAll();
-           storage.delete("course-storage");
-           storage.delete("user-storage");
-           setRequestIsLogged(false);
-           setAuthUser(null);
+      React.useEffect(() => {
+        // define the async function
+        const removeData = async () => {
+          await AsyncStorage.removeItem("token");
+          await AsyncStorage.removeItem("user");
+          //  storage.clearAll();
+          //  storage.delete("course-storage");
+          //  storage.delete("user-storage");
+          setRequestIsLogged(false);
+          setAuthUser(null);
 
-           Toast.show({
-             type: "success",
-             text1: authUser?.others?.name,
-             text2: " logged out",
-           });
+          Toast.show({
+            type: "success",
+            text1: authUser?.others?.name,
+            text2: " logged out",
+          });
+        };
+        // call the async function
+        removeData();
+        // optionally, return a cleanup function
+        // return () => {
+        //   // do some cleanup here
+        // };
+      }, []);
 
-       },[])
 
 
   return (

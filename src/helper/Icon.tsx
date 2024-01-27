@@ -74,7 +74,7 @@ export const HomeActiveIcon = (props: SvgProps) => (
       {...props}
     >
       <Path
-        fill="#282b31"
+        fill="#282c31"
         d="m27.5 14.5-2 1a9.7 9.7 0 0 0-11-2h-3a10.9 10.9 0 0 1 16 1Z"
         opacity={0.8}
       />
@@ -100,6 +100,52 @@ export const HomeActiveIcon = (props: SvgProps) => (
       />
       <Path
         fill="#282c31"
+        d="M12.5 26.5c2.2 2.1 4.9 3.1 8 3l-1 2c-2.4.2-4.4-.4-6-2-.6-.9-1-1.9-1-3Z"
+        opacity={0.9}
+      />
+    </Svg>
+  );
+
+  export const SearchAciveIcon = (props: SvgProps) => (
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      fillRule="evenodd"
+      clipRule="evenodd"
+      imageRendering="optimizeQuality"
+      shapeRendering="geometricPrecision"
+      textRendering="geometricPrecision"
+      viewBox="0 0 40 44"
+      width={40}
+      height={40}
+      {...props}
+    >
+      <Path
+        fill="#AF5E41"
+        d="m27.5 14.5-2 1a9.7 9.7 0 0 0-11-2h-3a10.9 10.9 0 0 1 16 1Z"
+        opacity={0.8}
+      />
+      <Path
+        fill="#AF5E41"
+        d="M11.5 13.5h3c-2.7 2.4-4 5.4-4 9l-2-1c0-3.1 1-5.8 3-8Zm16 1c1.7 2.3 2.4 5 2 8l-2-1c-.1-2.2-.8-4.2-2-6l2-1Z"
+        opacity={0.8}
+      />
+      <Path
+        fill="#AF5E41"
+        d="m8.5 21.5 2 1 2 4c0 1.1.4 2.1 1 3a6.3 6.3 0 0 1-4.5-4 8.4 8.4 0 0 1-.5-4Z"
+        opacity={0.8}
+      />
+      <Path
+        fill="#AF5E41"
+        d="m27.5 21.5 2 1c-.2 1.7-.8 3-2 4a6.5 6.5 0 0 0-3 3c-1.1 1.7-2.8 2.4-5 2l1-2c3.8-1.4 6-4 7-8Z"
+        opacity={0.8}
+      />
+      <Path
+        fill="#AF5E41"
+        d="M27.5 26.5c.5 1.9 1.5 3.6 3 5l-1 1a11.4 11.4 0 0 0-5-3 6.5 6.5 0 0 1 3-3Z"
+        opacity={0.6}
+      />
+      <Path
+        fill="#AF5E41"
         d="M12.5 26.5c2.2 2.1 4.9 3.1 8 3l-1 2c-2.4.2-4.4-.4-6-2-.6-.9-1-1.9-1-3Z"
         opacity={0.9}
       />

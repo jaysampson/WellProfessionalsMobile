@@ -29,7 +29,6 @@ const AllCoursesComp = ({
 }: AllCoursesCompType) => {
   const navigation = useNavigation();
 
-  console.log(authUser, "data");
 
   return (
     <>
