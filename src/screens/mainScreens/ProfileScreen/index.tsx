@@ -39,16 +39,13 @@ const ProfileScreen = () => {
       setRequestIsLogged: state.setRequestIsLogged,
       requestLoggedIn: state.requestLoggedIn,
       setAuthUser: state.setAuthUser,
-      authUser: state.authUser
-
+      authUser: state.authUser,
     }));
 
   //CALL USEQUERY
   const { isLoading, isError, error, data } = useQuery(["getme"], getMeUser);
-  
-  // console.log( data, "authUser888888888");
 
-
+  // console.log( requestLoggedIn,authUser, "authUser888888888");
 
   //LOG OUT LOGIC
   const handleLogout = () => {
@@ -61,19 +58,21 @@ const ProfileScreen = () => {
       {
         text: "Ok",
         onPress: async () => {
-          Toast.show({
-            type: "success",
-            text1: authUser?.others?.name,
-            text2: "You've logging out",
-          });
-          // await AsyncStorage.removeItem("token");
-          // await AsyncStorage.removeItem("user");
+         
+          await AsyncStorage.removeItem("token");
+          await AsyncStorage.removeItem("user");
           // delete all keys
-          storage.clearAll();
-          storage.delete("course-storage");
+          // storage.clearAll();
+          // storage.delete("course-storage");
+          // storage.delete("user-storage");
           setRequestIsLogged(false);
           setAuthUser(null);
-         
+
+           Toast.show({
+             type: "success",
+            //  text1: authUser?.others?.name,
+             text2: "You've logged out",
+           });
 
           console.log("removed");
         },

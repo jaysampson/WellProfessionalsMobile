@@ -10,7 +10,7 @@ import useCourseCartStore from "../../../stores/cartStores";
 const CartScreen = () => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const authUser = useAuthStore((state) => state.authUser);
-  const user_Id = authUser.others._id;
+  const user_Id = authUser?.data?._id;
 
   // const { coursesItem, removeFromCart, getTotalAmount, totalAmount } =
   //   useCartStore((state) => state);

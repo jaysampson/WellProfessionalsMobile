@@ -14,6 +14,7 @@ import ListCategories from "../../components/mainComponents/HomeScreenComp/Cours
 import SearchScreen from "../../screens/mainScreens/SearchScreen";
 import MyCoursesScreen from "../../screens/mainScreens/HomeScreen/MyCoursesScreen";
 import MylessonsScreen from "../../screens/mainScreens/HomeScreen/MylessonsScreen";
+import LogoutScreen from "../../screens/mainScreens/HomeScreen/LogoutScreen";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -84,6 +85,11 @@ const HomeStackNavigators = () => {
         <HomeStack.Screen
           name="MylessonsScreen"
           component={MylessonsScreen}
+          options={{ headerShown: false }}
+        />
+        <HomeStack.Screen
+          name="LogoutScreen"
+          component={LogoutScreen}
           options={{ headerShown: false }}
         />
       </HomeStack.Group>

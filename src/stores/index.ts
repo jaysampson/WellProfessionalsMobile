@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { zustandStorage } from "../mmkvStore";
 
 // import { IUser } from '../api/types';
 
@@ -34,7 +33,7 @@ const authStore = (set) => ({
 export const useAuthStore = create(
   persist(authStore, {
     name: "user-storage", // unique name
-    storage: createJSONStorage(() => zustandStorage), // Add this here!
+    storage: createJSONStorage(() => AsyncStorage), // Add this here!
   })
 );
 
@@ -54,7 +53,7 @@ export default useAuthStore;
 //     }),
 //     {
 //       name: "user-storage", // unique name
-//       storage: createJSONStorage(() => zustandStorage), // Add this here!
+//       storage: createJSONStorage(() => AsyncStorage), // Add this here!
 //     }
 //   )
 // );

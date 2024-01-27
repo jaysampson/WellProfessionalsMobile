@@ -1,8 +1,8 @@
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import React from 'react'
 import { useNavigation } from "@react-navigation/native";
-import { EvilIcons } from "@expo/vector-icons";
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+// import { EvilIcons } from "@expo/vector-icons";
+import { MaterialIcons, Ionicons, EvilIcons } from "@expo/vector-icons";
 
 
 const ListCategories = () => {
@@ -23,8 +23,8 @@ const ListCategories = () => {
         </Text>
         <View />
       </View>
-      <View className="mx-auto">
-        <View className=" w-[337px] h-[230px] items-center  bg-[#F2F4F8] rounded-[20px]">
+      <View className=" mt-4">
+        <View className="  h-[230px] items-center  bg-[#F2F4F8] rounded-[20px]">
           <View className=" w-[312px] h-[156px] mt-[12px]">
             <Image
               source={require("../../../../../assets/img/category.png")}
@@ -51,7 +51,7 @@ const ListCategories = () => {
                 }}
               />
             </View>
-            <View className="w-[188px] h-[98.88px] rounded  ">
+            <View className=" h-[98.88px] rounded  ">
               <Text className="text-[11px] font-[700] font-[Plusregular] leading-[20px]">
                 Reservoir Engineering Principles
               </Text>

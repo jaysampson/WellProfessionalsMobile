@@ -18,7 +18,7 @@ const ProfileScreenComp = ({
   authUser,
 }) => {
   const navigation = useNavigation();
-  console.log(data, "url");
+  // console.log(data, "url");
 
   return (
     <View className="py-10 px-6 my-5">

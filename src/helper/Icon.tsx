@@ -21,6 +21,25 @@ export const HomeIcon = (props: SvgProps) => (
   </Svg>
 );
 
+export const HomeActiveIcon = (props: SvgProps) => (
+  <Svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    fill="none"
+    {...props}
+  >
+    <Path
+      fill="#AF5E41"
+      d="M12 18.75c-.41 0-.75-.34-.75-.75v-3c0-.41.34-.75.75-.75s.75.34.75.75v3c0 .41-.34.75-.75.75Z"
+    />
+    <Path
+      fill="#AF5E41"
+      d="M17.6 22.56H6.4c-1.82 0-3.48-1.4-3.78-3.19L1.29 11.4c-.22-1.24.39-2.83 1.38-3.62L9.6 2.23c1.34-1.08 3.45-1.07 4.8.01l6.93 5.54c.98.79 1.58 2.38 1.38 3.62l-1.33 7.96c-.3 1.77-2 3.2-3.78 3.2ZM11.99 2.93c-.53 0-1.06.16-1.45.47L3.61 8.96c-.56.45-.96 1.49-.84 2.2l1.33 7.96c.18 1.05 1.23 1.94 2.3 1.94h11.2c1.07 0 2.12-.89 2.3-1.95l1.33-7.96c.11-.7-.29-1.76-.84-2.2l-6.93-5.54c-.4-.32-.94-.48-1.47-.48Z"
+    />
+  </Svg>
+);
+
 
   export const FeaturedIcon = (props: SvgProps) => (
     <Svg
@@ -55,7 +74,7 @@ export const HomeIcon = (props: SvgProps) => (
       {...props}
     >
       <Path
-        fill="#282b31"
+        fill="#282c31"
         d="m27.5 14.5-2 1a9.7 9.7 0 0 0-11-2h-3a10.9 10.9 0 0 1 16 1Z"
         opacity={0.8}
       />
@@ -87,6 +106,52 @@ export const HomeIcon = (props: SvgProps) => (
     </Svg>
   );
 
+  export const SearchAciveIcon = (props: SvgProps) => (
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      fillRule="evenodd"
+      clipRule="evenodd"
+      imageRendering="optimizeQuality"
+      shapeRendering="geometricPrecision"
+      textRendering="geometricPrecision"
+      viewBox="0 0 40 44"
+      width={40}
+      height={40}
+      {...props}
+    >
+      <Path
+        fill="#AF5E41"
+        d="m27.5 14.5-2 1a9.7 9.7 0 0 0-11-2h-3a10.9 10.9 0 0 1 16 1Z"
+        opacity={0.8}
+      />
+      <Path
+        fill="#AF5E41"
+        d="M11.5 13.5h3c-2.7 2.4-4 5.4-4 9l-2-1c0-3.1 1-5.8 3-8Zm16 1c1.7 2.3 2.4 5 2 8l-2-1c-.1-2.2-.8-4.2-2-6l2-1Z"
+        opacity={0.8}
+      />
+      <Path
+        fill="#AF5E41"
+        d="m8.5 21.5 2 1 2 4c0 1.1.4 2.1 1 3a6.3 6.3 0 0 1-4.5-4 8.4 8.4 0 0 1-.5-4Z"
+        opacity={0.8}
+      />
+      <Path
+        fill="#AF5E41"
+        d="m27.5 21.5 2 1c-.2 1.7-.8 3-2 4a6.5 6.5 0 0 0-3 3c-1.1 1.7-2.8 2.4-5 2l1-2c3.8-1.4 6-4 7-8Z"
+        opacity={0.8}
+      />
+      <Path
+        fill="#AF5E41"
+        d="M27.5 26.5c.5 1.9 1.5 3.6 3 5l-1 1a11.4 11.4 0 0 0-5-3 6.5 6.5 0 0 1 3-3Z"
+        opacity={0.6}
+      />
+      <Path
+        fill="#AF5E41"
+        d="M12.5 26.5c2.2 2.1 4.9 3.1 8 3l-1 2c-2.4.2-4.4-.4-6-2-.6-.9-1-1.9-1-3Z"
+        opacity={0.9}
+      />
+    </Svg>
+  );
+
  export  const CartIcon = (props: SvgProps) => (
    <Svg
      xmlns="http://www.w3.org/2000/svg"
@@ -101,6 +166,24 @@ export const HomeIcon = (props: SvgProps) => (
        strokeLinejoin="round"
        strokeWidth={1.5}
        d="M16.5 11V7a4 4 0 0 0-8 0v4m-3-2h14l1 12h-16l1-12Z"
+     />
+   </Svg>
+ );
+ 
+ export const CartActiveIcon = (props: SvgProps) => (
+   <Svg
+     xmlns="http://www.w3.org/2000/svg"
+     width={24}
+     height={24}
+     fill="none"
+     {...props}
+   >
+     <Path
+       stroke="#AF5E41"
+       strokeLinecap="round"
+       strokeLinejoin="round"
+       strokeWidth={1.5}
+       d="M16 11V7a4 4 0 0 0-8 0v4M5 9h14l1 12H4L5 9Z"
      />
    </Svg>
  );
@@ -120,6 +203,25 @@ export const HomeIcon = (props: SvgProps) => (
       <Path
         fill="#292D32"
         d="M12 22.75C6.07 22.75 1.25 17.93 1.25 12S6.07 1.25 12 1.25 22.75 6.07 22.75 12 17.93 22.75 12 22.75Zm0-20C6.9 2.75 2.75 6.9 2.75 12S6.9 21.25 12 21.25s9.25-4.15 9.25-9.25S17.1 2.75 12 2.75Z"
+      />
+    </Svg>
+  );
+
+  export const ProfileActiveIcon = (props: SvgProps) => (
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={25}
+      height={24}
+      fill="none"
+      {...props}
+    >
+      <Path
+        fill="#AF5E41"
+        d="M12.62 13.53h-.17c-2.27-.07-3.97-1.84-3.97-4.02 0-2.22 1.81-4.03 4.03-4.03s4.03 1.81 4.03 4.03a4.014 4.014 0 0 1-3.89 4.02h-.03Zm-.12-6.56c-1.4 0-2.53 1.14-2.53 2.53a2.52 2.52 0 0 0 2.43 2.53.84.84 0 0 1 .23 0 2.535 2.535 0 0 0 2.4-2.53c0-1.39-1.13-2.53-2.53-2.53ZM12.5 22.75c-2.69 0-5.26-1-7.25-2.82a.755.755 0 0 1-.24-.63c.13-1.19.87-2.3 2.1-3.12 2.98-1.98 7.81-1.98 10.78 0 1.23.83 1.97 1.93 2.1 3.12.03.24-.06.47-.24.63a10.71 10.71 0 0 1-7.25 2.82ZM6.58 19.1a9.208 9.208 0 0 0 5.92 2.15c2.17 0 4.26-.76 5.92-2.15-.18-.61-.66-1.2-1.37-1.68-2.46-1.64-6.63-1.64-9.11 0-.71.48-1.18 1.07-1.36 1.68Z"
+      />
+      <Path
+        fill="#AF5E41"
+        d="M12.5 22.75C6.57 22.75 1.75 17.93 1.75 12S6.57 1.25 12.5 1.25 23.25 6.07 23.25 12 18.43 22.75 12.5 22.75Zm0-20C7.4 2.75 3.25 6.9 3.25 12s4.15 9.25 9.25 9.25 9.25-4.15 9.25-9.25-4.15-9.25-9.25-9.25Z"
       />
     </Svg>
   );

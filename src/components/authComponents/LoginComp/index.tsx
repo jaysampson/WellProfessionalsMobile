@@ -5,9 +5,12 @@ import CustomButton from "../../customComponents/customButton";
 import Checkbox from "expo-checkbox";
 import { FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 import Spinner from "react-native-loading-spinner-overlay";
-// import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { GoogleIcon } from "../../../helper/Icon";
+import { Controller, useForm } from "react-hook-form";
+import { User } from "../../../helper/api";
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type LoginType = {
   onchangeText: (name: string, value: string) => void;
@@ -15,9 +18,14 @@ type LoginType = {
   isChecked: boolean;
   setChecked: (value: boolean) => void;
   isSecureEntry: boolean;
-  setIsSecureEntry: (prev:boolean) => void;
-  onSubmit: () => void;
+  setIsSecureEntry: (isSecureEntry: boolean) => void;
+  onSubmit: () => Promise<User>;
   isLoading: boolean;
+};
+
+type FormData = {
+  email: string;
+  password: string;
 };
 
 const LoginComp = ({
@@ -31,6 +39,14 @@ const LoginComp = ({
   isLoading,
 }: LoginType) => {
   const navigation = useNavigation();
+
+
+  //useForm
+  const {
+    control,
+    handleSubmit,
+    formState,
+  } = useForm<FormData>();
   return (
     <>
       <Spinner
@@ -61,43 +77,69 @@ const LoginComp = ({
               </Text>
             </View>
           </View>
-
-          <CustomInput
-            label="Email Address"
-            // value={value}
-            onChangeText={(value) => {
-              onchangeText("email", value);
+          <Controller
+            control={control}
+            name="email"
+            rules={{
+              required: "email is required",
+              pattern: { value: EMAIL_REGEX, message: "Email is invalid" },
             }}
-            placeholder={"Input your email adddres"}
-            // style={styles.input}
-            // error={"This Feild is require"}
+            render={({
+              field: { value, onChange, onBlur },
+              fieldState: { error },
+            }) => (
+              <CustomInput
+                label="Email Address"
+                placeholder={"Input your email adddres"}
+                value={value}
+                onChangeText={onChange}
+                error={error?.message}
+              />
+            )}
           />
 
-          <CustomInput
-            label="Create password"
-            // value={value2}
-            secureTextEntry={isSecureEntry}
-            onChangeText={(value) => {
-              onchangeText("password", value);
+          <Controller
+            control={control}
+            name="password"
+            rules={{
+              required: "Password is required",
+              minLength: { value: 6, message: "Password should be 6 char" },
             }}
-            placeholder={"Create your password"}
-            icon={
-              <TouchableOpacity
-                onPress={() => {
-                  setIsSecureEntry((prev) => !prev);
-                }}
-              >
-                {/* <FontAwesome5 name="eye" size={24} color="black" /> */}
+            render={({
+              field: { value, onChange, onBlur },
+              fieldState: { error },
+            }) => (
+              <CustomInput
+                label="Create password"
+                // value={value2}
+                secureTextEntry={isSecureEntry}
+                value={value}
+                onChangeText={onChange}
+                error={error?.message}
+                placeholder={"Create your password"}
+                icon={
+                  <TouchableOpacity
+                    onPress={() => {
+                      setIsSecureEntry(!isSecureEntry);
+                    }}
+                  >
+                    {/* <FontAwesome5 name="eye" size={24} color="black" /> */}
 
-                {isSecureEntry ? (
-                  <FontAwesome5 name="eye-slash" size={24} color="#6C7072" />
-                ) : (
-                  <FontAwesome5 name="eye" size={24} color="#6C7072" />
-                )}
-              </TouchableOpacity>
-            }
-            iconPostion="right"
-            // style={styles.input}
+                    {isSecureEntry ? (
+                      <FontAwesome5
+                        name="eye-slash"
+                        size={24}
+                        color="#6C7072"
+                      />
+                    ) : (
+                      <FontAwesome5 name="eye" size={24} color="#6C7072" />
+                    )}
+                  </TouchableOpacity>
+                }
+                iconPostion="right"
+                // style={styles.input}
+              />
+            )}
           />
           <View className="flex-row items-center justify-between my-5">
             <View className="flex-row">
@@ -127,7 +169,7 @@ const LoginComp = ({
             title="Login"
             loading={isLoading}
             disabled={isLoading}
-            onPress={onSubmit}
+            onPress={handleSubmit(onSubmit)}
           />
 
           <View className="pt-10 ">

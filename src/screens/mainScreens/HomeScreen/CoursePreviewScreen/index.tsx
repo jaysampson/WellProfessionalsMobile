@@ -2,7 +2,7 @@ import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import CoursePrevieComp from "../../../../components/mainComponents/HomeScreenComp/CoursePreviewComp";
 import { useRoute } from "@react-navigation/native";
-import { getUsers } from "../../../../helper/api";
+import { getAUser, getUsers } from "../../../../helper/api";
 import { useQuery } from "react-query";
 import Toast from "react-native-toast-message";
 import useAuthStore from "../../../../stores";
@@ -11,11 +11,31 @@ import useCourseCartStore from "../../../../stores/cartStores";
 const CoursePreviewScreen = () => {
   const { params: { item = {} } = {} } = useRoute();
   console.log(item, "item");
+   const [rating, setRating] = React.useState(0);
   const [categoriesIndex, setCategoriesIndex] = React.useState(0);
+
+
+  
+  const courseCategories = ["Details", "Lessions", "Reviews"];
+
+
+  //USEQUERY
+   const getAllUsers = useQuery(["getAllUsers"], getUsers);
+
+   const {
+     data: getAUserInfo,
+     error: getAUSerError,
+     isLoading: getAUserLoading,
+   } = useQuery({
+     queryKey: ["UserId"],
+     queryFn: () => getAUser(authUser?.others?._id),
+   });
 
   const authUser = useAuthStore((state) => state.authUser);
 
-  const courseData = authUser.others.courses.find((d) => d._id === item._id);
+  const courseData = getAUserInfo?.data?.courses?.find(
+    (d) => d._id === item._id
+  );
 
   const { addToCartItem, getTotalAmount, coursesItem } = useCourseCartStore(
     (state) => ({
@@ -25,8 +45,7 @@ const CoursePreviewScreen = () => {
     })
   );
 
-  // console.log(coursesItem, "coursesItem")
-  // console.log(authUser, "authUser344")
+
 
   const handlAddToCart = (item) => {
     const courseIsExist = coursesItem?.find((d) => d._id === item._id) 
@@ -54,11 +73,12 @@ const CoursePreviewScreen = () => {
   // );
   // const averageRating = totalRating > 0 ? sumRatings / totalRating : 0;
   // USESTATE
-  const [rating, setRating] = React.useState(0);
+ 
   // ########### averageRating ########
 
-  const courseCategories = ["Details", "Lessions", "Reviews"];
-  const getAllUsers = useQuery(["getAllUsers"], getUsers);
+ 
+
+  // console.log(getAUserInfo?.data?.courses, courseData, "getAUserInfo");
 
   return (
     <CoursePrevieComp

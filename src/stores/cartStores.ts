@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { zustandStorage } from "../mmkvStore";
 
 const courseCartStore = (set) =>({
   coursesItem: [],
@@ -32,7 +31,7 @@ const useCourseCartStore = create(
   persist(
     courseCartStore,{
       name: "user-storage", // unique name
-    storage: createJSONStorage(() => zustandStorage), // Add this here!
+    storage: createJSONStorage(() => AsyncStorage), // Add this here!
     }
   )
 )
